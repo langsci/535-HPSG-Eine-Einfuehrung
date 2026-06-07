@@ -1,0 +1,32 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%   $RCSfile: hpsg-lehrbuch.tex,v $
+%%  $Revision: 1.2 $
+%%      $Date: 2004/07/11 17:37:05 $
+%%     Author: Stefan Mueller (CL Uni-Bremen)
+%%    Purpose: 
+%%   Language: LaTeX
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[smallheadings,bibtotoc,idxtotoc,%
+%oneside,% Stauffenburg Style
+10pt,%    Stauffenburg Style 
+cleardoublempty]{scrbook}
+
+
+
+\usepackage{ifthen}
+\provideboolean{draft}
+\setboolean{draft}{false}
+
+
+
+\newcommand{\NOTE}[1]{}
+%\newcommand{\NOTE}[1]{\marginpar{#1}}
+
+%\usepackage[frame,width=126mm,height=196mm,center,dvips]{crop}
+
+
+\includeonly{hpsg-loesungen}
+
+\input hpsg-lehrbuch-include

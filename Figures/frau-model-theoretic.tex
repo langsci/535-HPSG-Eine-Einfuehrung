@@ -1,0 +1,101 @@
+%% -*- coding:utf-8 -*-
+\documentclass[ number=1
+                ,series=tbls,
+	        %,blackandwhite
+	        ,smallfont
+	        %,draftmode  
+		  ]{../langscibook}                          
+
+% use pdfcrop for cropping
+
+
+\usepackage{makros.2e,merkmalstruktur}
+
+\usepackage{pstricks,pst-node}
+
+%\nodemargin5pt%\treelinewidth2pt\arrowwidth6pt\arrowlength10pt
+\psset{nodesep=5pt} %,linewidth=0.8pt,arrowscale=2}
+\psset{linewidth=0.5pt}
+
+% compile with texlive 2013
+
+\begin{document}
+\thispagestyle{empty}
+
+%\oneline{%
+\begin{pspicture}(-0.5,0.4)(2.8,4.1)
+%\psgrid
+     \psset{fillstyle=solid, fillcolor=black,radius=0.75mm}
+     \pnode(-0.4,2){start1}
+     \Cnode(0,2){Nomen1}
+     \Cnode(2,4){fem1}
+     \Cnode(2,1){nom1}
+%
+     \psset{fillstyle=none,nodesep=0pt,angleB=180,arrows=->} 
+%
+     \nccurve{start1}{Nomen1}
+     \nccurve{Nomen1}{fem1}\naput{\textsc{Genus}}
+     \nccurve{Nomen1}{nom1}\naput{\textsc{Kasus}}
+%
+     \nput{270}{Nomen1}{\type{Nomen}}
+     \nput{270}{fem1}{\type{fem}}
+     \nput{270}{nom1}{\type{Nominativ}}
+\end{pspicture}
+\begin{pspicture}(-0.5,0.4)(2.8,4.1)
+%\psgrid
+%
+     \psset{fillstyle=solid, fillcolor=black,radius=0.75mm}
+     \pnode(-0.4,2){start2}
+     \Cnode(0,2){Nomen2}
+     \Cnode(2,4){fem2}
+     \Cnode(2,1){nom2}
+%
+     \psset{fillstyle=none,nodesep=0pt,angleB=180,arrows=->} 
+%
+     \nccurve{start2}{Nomen2}
+     \nccurve{Nomen2}{fem2}\naput{\textsc{Genus}}
+     \nccurve{Nomen2}{nom2}\naput{\textsc{Kasus}}
+
+     \nput{270}{Nomen2}{\type{Nomen}}
+     \nput{270}{fem2}{\type{fem}}
+     \nput{270}{nom2}{\type{Genitiv}}
+\end{pspicture}
+\begin{pspicture}(-0.5,0.4)(2.8,4.1)
+%\psgrid
+     \psset{fillstyle=solid, fillcolor=black,radius=0.75mm}
+     \pnode(-0.4,2){start3}
+     \Cnode(0,2){Nomen3}
+     \Cnode(2,4){fem3}
+     \Cnode(2,1){nom3}
+%
+     \psset{fillstyle=none,nodesep=0pt,angleB=180,arrows=->} 
+%
+     \nccurve{start3}{Nomen3}
+     \nccurve{Nomen3}{fem3}\naput{\textsc{Genus}}
+     \nccurve{Nomen3}{nom3}\naput{\textsc{Kasus}}
+%
+     \nput{270}{Nomen3}{\type{Nomen}}
+     \nput{270}{fem3}{\type{fem}}
+     \nput{270}{nom3}{\type{Dativ}}
+\end{pspicture}
+\begin{pspicture}(-0.5,0.4)(2.8,4.1)
+%\psgrid
+     \psset{fillstyle=solid, fillcolor=black,radius=0.75mm}
+     \pnode(-0.4,2){start2}
+     \Cnode(0,2){Nomen2}
+     \Cnode(2,4){fem2}
+     \Cnode(2,1){nom2}
+%
+     \psset{fillstyle=none,nodesep=0pt,angleB=180,arrows=->} 
+%
+     \nccurve{start2}{Nomen2}
+     \nccurve{Nomen2}{fem2}\naput{\textsc{Genus}}
+     \nccurve{Nomen2}{nom2}\naput{\textsc{Kasus}}
+%
+     \nput{270}{Nomen2}{\type{Nomen}}
+     \nput{270}{fem2}{\type{fem}}
+     \nput{270}{nom2}{\type{Akkusativ}}
+\end{pspicture}
+
+
+\end{document}

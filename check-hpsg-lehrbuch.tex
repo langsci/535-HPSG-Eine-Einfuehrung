@@ -1,0 +1,150 @@
+%% -*- coding:utf-8 -*-
+\documentclass[output=book,
+               smallfont
+%                ,series=tbls,
+%		,modfonts
+%		,nonflat
+%		,multiauthors
+%	        ,collection
+%	        ,collectionchapter
+%	        ,collectiontoclongg
+% 	        ,biblatex
+                ,decapbib
+%                ,babel
+                ,booklanguage=german
+%                ,babelshorthands
+%                ,showindex
+%                ,newtxmath
+%                ,colorlinks, citecolor=brown % for drafts
+%                ,draftmode
+% 	        ,coverus
+                ,uniformtopskip
+		  ]{langscibook} 
+
+
+%	citestyle=langsci-unified,
+%	datamodel=langsci,   % add authauthor and autheditor as possible fields to bibtex entries
+
+
+
+
+%\renewcommand{\lsBookLanguage}{german}
+
+\usepackage{ifthen}
+\provideboolean{draft}
+\setboolean{draft}{false}
+
+%\newtoggle{draft}\togglefalse{draft}
+\newtoggle{draft}\toggletrue{draft}
+%\newtoggle{finished}\togglefalse{finished}
+
+% https://tex.stackexchange.com/a/111851/18561
+\DeclareSourcemap{
+    \maps[datatype=bibtex]{
+      \map{
+        \step[fieldsource=checked]
+        \step[fieldset=usera,origfieldval]
+    }
+  }
+}
+
+%\DeclareFieldFormat{usera}{\red{#1}}
+
+% This shows the value of checked:
+%\AtEveryBibitem{
+%\csappto{blx@bbx@\thefield{entrytype}}{\iffieldundef{usera}{\space \red{Not checked!}}{\space\green{\printfield{usera}}}}
+%}
+% This just shows a warning for unchecked items
+\AtEveryBibitem{
+\csappto{blx@bbx@\thefield{entrytype}}{\iffieldundef{usera}{\space \red{Not checked!}}{}}
+}
+
+
+% load memoize before german.sty
+
+%\usepackage{nomemoize} 
+%\usepackage[extract=no]{memoize} % If malformed trees occur in a first pass, use this and extract later.
+\usepackage[extract=python]{memoize} 
+%\usepackage[biblatex={}]{memoize} % 
+
+%\memoizeset{readonly}
+% see below for further settings
+
+
+
+\input{localhyphenation.tex} % has to be loaded before german.sty
+\input{localmetadata.tex}
+\input{localpackages.tex}
+\input{localcommands.tex}
+
+
+\input{locallangscifixes.tex}
+
+
+\usepackage[german]{varioref}
+% do not stop and warn! This will be tested in the final version
+%\vrefwarning
+
+
+\newcommand{\NOTE}[1]{}\newcommand{\LATER}[1]{}
+%\newcommand{\NOTE}[1]{\marginpar{#1}}\newcommand{\LATER}[1]{}
+
+\mmzset{
+  prefix=hpsg.memo.dir/,
+}
+
+
+% \renewcommand{\itd}[1]{}
+% \renewcommand{\itdobl}[1]{}
+% \renewcommand{\itdopt}[1]{}
+
+% \renewcommand{\addpages}{}
+% \renewcommand{\addsource}{}
+% \renewcommand{\addglosses}{}
+
+
+%\bibliography{bib-abbr,biblio-xdata-en,biblio}
+% we have to load from here since we have to include all references since we need "Müller 2004d" in
+% the text since it takes more space than "Müller 2004". So we have to include a \nocite{*} here.
+\bibliography{hpsg-lehrbuch}
+
+
+%\includeonly{chapters/00-hpsg-vorwort}
+%\includeonly{chapters/00-hpsg-danksagungen}
+%\includeonly{chapters/00-hpsg-vorwort,chapters/00-hpsg-danksagungen}
+%\includeonly{chapters/01-hpsg-einleitung}
+%\includeonly{chapters/02-hpsg-formalismus}
+%\includeonly{chapters/03-hpsg-valenz-psg}
+%\includeonly{chapters/04-hpsg-komplementation}
+%\includeonly{chapters/05-hpsg-semantik}
+%\includeonly{chapters/06-hpsg-lexikon}
+%\includeonly{chapters/07-hpsg-topologie}
+%\includeonly{chapters/08-hpsg-konstituentenreihenfolge}
+%\includeonly{chapters/09-hpsg-udc}
+%\includeonly{chapters/10-hpsg-rs}
+%\includeonly{chapters/11-hpsg-lokalitaet}
+%\includeonly{chapters/12-hpsg-kongruenz}
+%\includeonly{chapters/13-hpsg-kasus}
+\includeonly{chapters/14-hpsg-verbalkomplex}
+%\includeonly{chapters/15-hpsg-anhebung}
+%\includeonly{chapters/16-hpsg-passiv}
+%\includeonly{chapters/17-hpsg-partikel}
+%\includeonly{chapters/18-hpsg-morphologie}
+%\includeonly{chapters/19-hpsg-theorie}
+%\includeonly{chapters/hpsg-loesungen}
+
+%\includeonly{chapters/17-hpsg-partikel,chapters/18-hpsg-morphologie,chapters/hpsg-loesungen}
+
+\input hpsg-lehrbuch-include
+
+% Hack to get all items cited in the files not included in this run.
+% only use this if you have gt.bib
+% explanation above, we need this since we want to have all occurrances of Müller 2004a,b,c
+\nocite{*}
+
+
+\end{document}
+
+%%% Local Variables:
+%%% TeX-command-extra-options: "-shell-escape"
+%%% End:

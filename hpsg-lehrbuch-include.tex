@@ -1,0 +1,76 @@
+%% -*- coding:utf-8 -*-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%   $RCSfile: hpsg-lehrbuch-include.tex,v $
+%%  $Revision: 1.16 $
+%%      $Date: 2008/09/30 09:14:41 $
+%%     Author: Stefan Mueller (CL Uni-Bremen)
+%%    Purpose: 
+%%   Language: LaTeX
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\hypersetup{bookmarksopenlevel=0}
+
+
+
+%\renewcommand{\centerfit}[1]{}
+
+
+\provideboolean{hpsg-buch}
+\setboolean{hpsg-buch}{true}
+
+\PassOptionsToPackage{main=ngerman}{babel}
+
+
+\begin{document} 
+
+%\lsBookLanguageGerman
+
+% \mmzset{
+%   deactivate=\todo,
+% }
+
+\include{title-toc}
+
+
+\include{chapters/00-hpsg-vorwort}
+\include{chapters/00-hpsg-danksagungen}
+% \include{chapters/acknowledgments}
+% \include{chapters/abbreviations} 
+
+\mainmatter
+\include{chapters/01-hpsg-einleitung}
+\include{chapters/02-hpsg-formalismus}
+\include{chapters/03-hpsg-valenz-psg}
+\include{chapters/04-hpsg-komplementation}
+\include{chapters/05-hpsg-semantik}
+\include{chapters/06-hpsg-lexikon}
+\include{chapters/07-hpsg-topologie}
+\include{chapters/08-hpsg-konstituentenreihenfolge}
+\include{chapters/09-hpsg-udc}
+\include{chapters/10-hpsg-rs}
+\include{chapters/11-hpsg-lokalitaet}
+\include{chapters/12-hpsg-kongruenz}
+\include{chapters/13-hpsg-kasus}
+\include{chapters/14-hpsg-verbalkomplex}
+\include{chapters/15-hpsg-anhebung}
+\include{chapters/16-hpsg-passiv}
+\include{chapters/17-hpsg-partikel}
+
+\include{chapters/18-hpsg-morphologie}
+
+\include{chapters/19-hpsg-theorie}
+
+\appendix
+\include{chapters/hpsg-loesungen}
+
+\mmzset{disable}
+\input{backmatter}
+
+
+%      <!-- Local IspellDict: en_US-w_accents -->
+
+
+%%% Local Variables:
+%%% TeX-master: "check-germanic"
+%%% TeX-command-extra-options: "-shell-escape"
+%%% End:

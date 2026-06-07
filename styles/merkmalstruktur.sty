@@ -1,0 +1,347 @@
+% drs-Paket ist mit array inkompatibel
+% avm.sty ist mit array inkompatibel
+\usepackage{array}
+
+
+
+%\font\msrm=cmr6
+%\font\msit=cmr7
+%cmti7
+
+%\newcommand{\myverba}[1]{ \begin{verbatim} #1 
+%                          \end{verbatim} 
+%                        }
+
+% ibox in Merkmalstrukturen + 0.5ex, da sonst Ausrichtung nicht klappt
+%\newcommand{\ibox}[1]{\hspace{0.5ex}\mbox{\rule[-1.2ex]{0mm}{2.3ex}\fbox{{\tiny\textrm #1}}}\hspace{0.5ex}}
+
+%% \def\ibox#1{\mbox{}\setbox2=\hbox{$\scriptstyle #1$}\lower.2ex\vbox{\hrule
+%%         \hbox{\vrule\kern1.25pt 
+%%         \vbox{\kern1.25pt\box2\kern1.25pt}\kern1.25pt\vrule}\hrule}}
+
+% im Text ist zusaetzlicher Platz falsch
+%\newcommand{\iboxt}[1]{\raisebox{0.36ex}{\fbox{{\tiny\textrm{#1}}}}}
+
+
+\newcommand{\iboxt}[1]{{%
+  \setlength{\fboxsep}{1.25pt}%
+  \fbox{$\scriptstyle #1$}%
+}}
+
+% added an extra \mbox for 
+% \comp \ibox{1}
+% to work with the standard xspace. St. Mü. 03.05.2025
+\newcommand{\ibox}[1]{\mbox{}%
+%  \iboxt{#1}\,%       why this extra space???? 20.02.2018
+\iboxt{#1}%
+}
+
+% used in lists \sliste{ \iboxsp{1}, \ibox{2} }
+\newcommand{\iboxsp}[1]{%
+  \iboxt{#1}\,%
+}
+
+\newcommand{\iboxb}[1]{(\,\iboxt{#1}\,)}
+
+\newcommand{\sliste}[1]{%
+\mbox{%
+\hspace{-.9pt}$\langle$\mbox{\upshape\scshape #1}$\rangle$}%
+%\upshape⟨\scshape #1⟩\}%
+}
+% \newcommand{\sliste}[1]{%
+% \mbox{%
+% $\left\langle\mbox{\upshape\scshape #1}\right\rangle$}%
+% }
+
+
+
+\newcommand{\spirit}[1]{%
+{\renewcommand{\arraystretch}{0}%
+\begin{tabular}[t]{@{}c@{}}%
+\ibox{#1}\\[-3.2mm]
+\large/\\%
+\end{tabular}}}
+
+
+%\newcommand{\nliste}[1]{%
+%\mbox{$\left\langle\right.$\upshape\normalfont#1$\left.\right\rangle$}%
+%}
+\newcommand{\nliste}[1]{%
+\mbox{$\langle$\upshape\normalfont#1$\rangle$}%
+}
+
+
+
+\newcommand{\textmrs}[1]{%
+\textlangle #1 \textrangle}
+
+\let\semliste=\nliste
+
+\newcommand{\eliste}{%
+\mbox{%
+\hspace{-.9pt}$\left\langle\right\rangle$}%
+}
+
+\newcommand{\oldliste}[1]{%
+\mbox{%
+$%
+\left\langle%
+%
+\tabcolsep2pt\begin{tabular}{>{\sc}l}#1\end{tabular}%
+\right\rangle%
+$%
+%\\[-1.5mm]
+}%
+}
+
+
+
+% I do not remember, why there was a tabular environment. Seems to be overkill. 14.03.2025
+\newcommand{\liste}[1]{%
+\mbox{%
+$%
+\left\langle\mbox{\upshape\normalfont#1}\right\rangle%
+$%
+}%\\[2pt]%
+}
+
+% Some lists have a newline after an element. 24.05.2025 (09-cxg.tex in Grammatical theory)
+\newcommand{\tabularliste}[1]{%
+\mbox{%
+$%
+\left\langle\begin{tabular}{@{}>{\upshape}l@{}}#1\end{tabular}\right\rangle%
+$%
+%\\[-1.5mm]
+}%
+}
+
+% \newcommand{\tabularliste}[1]{%
+% \mbox{%
+% $%
+% \left\langle\begin{tabular}{@{}>{\upshape\scshape}l@{}}#1\end{tabular}\right\rangle%
+% $%
+% %\\[-1.5mm]
+% }%
+% }
+
+
+% textit does italics correction, which is needed for "helf", while \itshape does not. 05.03.2026
+\newcommand{\phonliste}[1]{%
+\mbox{$\langle$\normalfont\textit{#1}$\rangle$}%
+}
+
+% \newcommand{\phonliste}[1]{%
+% \mbox{%
+% \normalfont\textlangle \textit{#1}\textrangle}%
+% }
+
+
+
+%\let\phonlist\phonliste
+
+\newcommand{\relliste}[1]{%
+\mbox{%
+$%
+%
+\left\langle \textrm{#1} \right\rangle%
+$%
+%\\[-1.5mm]
+}%
+}
+
+
+
+\newcommand{\menge}[1]{%
+\mbox{%
+$%
+\left\{%
+\begin{tabular}{@{}l@{}}\ignorespaces#1\end{tabular}%
+\right\}%
+$%
+%\\[-1.5mm]
+}%
+}
+
+
+%----------------- new -------------------
+
+
+%\setlength{\extrarowheight}{1pt}
+
+% \newcommand{\ms}[2][]{%
+%   \mbox{%
+%     \delimiterfactor=1000 \delimitershortfall=0pt
+%     \tabcolsep=0pt
+%     $\left[%
+%     \begin{tabular}{>{\upshape\scshape}l@{}>{\hspace*{5pt}\normalfont\itshape}l}
+%     \if\relax\detokenize{#1}\relax\else
+%     \multicolumn{2}{>{\normalfont\itshape}l}{#1}%
+%     \\ 
+%     \fi
+%     #2%
+%     \end{tabular}%
+%     \right]$%
+%   }%
+%   \vspace{1mm}%
+% }
+
+% David Carlisle, 2026-02-15
+% https://tex.stackexchange.com/a/759739/18561
+\newcommand{\ms}[2][]{%
+\ifdim\lastskip=-1pt % flag value
+  \mbox{}\\*[-.8\baselineskip]%
+\else
+  \ifnum\lastpenalty=-10000 % other flag value
+    \mbox{}\\*[-.8\baselineskip]%
+  \fi
+\fi
+\mbox{%
+\delimiterfactor=1000 \delimitershortfall=0pt\tabcolsep=0pt%
+$\hspace{-1pt}\left[%
+\begin{tabular}{>{\upshape\scshape}l@{}>{\hspace*{5pt}\normalfont\itshape}l}
+    \if\relax\detokenize{#1}\relax\else
+        % https://tex.stackexchange.com/a/762975/18561
+        % no added vertical spacing on top
+        %\omit\span\omit \normalfont\itshape #1\hfill\mbox{}%
+        % some points of vertical space on top added back in
+        \omit\span\omit \normalfont\itshape\vrule height7pt width0pt\relax #1\hfill\mbox{}%
+        \\\noalign{\vspace{2pt}}%
+    \fi%
+#2%
+\end{tabular}%
+\right]\hspace{-1pt}$%
+}%
+% David Carlisle sagt man braucht \par, aber dann fehlen Zeilenumbrüche bei \zl
+%\par\vspace{1mm}%
+\vspace{1pt}%
+}
+
+
+
+% This is code to do the spaceing by hand. It is needed for special cases like
+% implications
+
+\def\msskip{\mbox{}\\*[-.8\baselineskip]}
+
+
+\newcommand{\onems}[2][]{%
+\ifdim\lastskip=-1pt % flag value
+  \mbox{}\\*[-.8\baselineskip]%
+\else
+  \ifnum\lastpenalty=-10000 % other flag value
+    \mbox{}\\*[-.8\baselineskip]%
+  \fi
+\fi
+\mbox{%
+    \delimiterfactor=1000 \delimitershortfall=0pt\tabcolsep=0pt
+    $\hspace{-1pt}\left[%
+    \begin{tabular}{>{\upshape\scshape}l}
+    \if\relax\detokenize{#1}\relax\else
+%    {\normalfont\itshape #1}%
+%    \\%
+        % https://tex.stackexchange.com/a/762975/18561
+        % no added vertical spacing on top
+        %\normalfont\itshape #1\hfill\mbox{}%
+        % some points of vertical space on top added back in
+        \normalfont\itshape\vrule height7pt width0pt\relax #1\hfill\mbox{}%
+        \\\noalign{\vspace{2pt}}%
+    \fi
+    #2%
+    \end{tabular}%
+    \right]\hspace{-1pt}$%
+  }%
+  \vspace{1pt}%
+}
+
+% The test would be too complicated, just do the skip.
+\newcommand{\onemsskip}[2][]{%
+\mbox{}\\*[-.8\baselineskip]%
+\mbox{%
+    \delimiterfactor=1000 \delimitershortfall=0pt\tabcolsep=0pt
+    $\hspace{-1pt}\left[%
+    \begin{tabular}{>{\upshape\scshape}l}
+    \if\relax\detokenize{#1}\relax\else
+    {\normalfont\itshape #1}%
+    \\%
+    \fi
+    #2%
+    \end{tabular}%
+    \right]\hspace{-1pt}$%
+  }%
+  \vspace{1pt}%
+}
+
+
+
+
+
+% without italics and no types
+\def\lfgms#1{%
+\mbox{%
+\tabcolsep0pt\arraycolsep0pt%
+$%
+\left[%
+\begin{tabular}{@{}>{\scshape}l@{\hspace{5pt}}>{\small}l@{}}%
+#1%
+\end{tabular}%
+\rule{0mm}{5mm}%
+\right]%
+$%
+}%
+\vspace{1mm}%
+}
+
+
+
+\newlength{\MyetagLength}
+\settowidth{\MyetagLength}{{$\scriptstyle 1$}}
+
+% empty box
+%\newcommand{\etag}{\ibox{\rule{0ex}{1.1ex}\hspace{\MyetagLength}}\xspace}
+\newcommand{\etag}{\ibox{\phantom{3}}\xspace}
+
+%\newcommand{\tbox}[1]{{\tiny\fbox{#1}}}
+\let\tbox=\iboxt
+
+
+%\newcommand{\type}[1]{\ifmmode\mathnormal{\mathit{#1}}\else\textnormal{\textit{#1}}\fi}
+% not related to the question but \mathnormal{\mathit{#1}} is the same as \mathit{#1} as math font commands don't combine. – 
+% David Carlisle
+%\newcommand{\type}[1]{\ifmmode\mathit{#1}\else\textnormal{\textit{#1}}\fi}
+
+% https://tex.stackexchange.com/a/759902/18561
+\DeclareTextFontCommand{\typefont}{\normalfont\itshape}
+\newcommand{\type}{}
+\DeclareRobustCommand{\type}{%
+  \ifmmode
+    \expandafter\mathit
+  \else
+    \expandafter\typefont
+  \fi
+}
+
+
+\newcommand{\typeSM}[1]{\ifmmode\mathnormal{\mathit{#1}}\else\textnormal{\textit{#1}}\fi}
+
+
+
+\def\topms{\@ifnextchar[{\@topmswithtype}{\@topmswithouttype}}
+
+\def\@topmswithtype[#1]#2{%
+\adjustbox{valign=c}{%
+\xxtms[#1]{#2}%
+}}
+
+\def\@topmswithouttype#1{%
+\adjustbox{valign=c}{%
+\xxms{#1}%
+}}
+
+
+
+\newcommand{\qeq}{$=_q$\xspace}
+
+\newcommand{\impl}{$\Rightarrow$\xspace}
+
+
+\newcommand{\npref}{NP\kern-1pt\sub{\type{ref}}\xspace}

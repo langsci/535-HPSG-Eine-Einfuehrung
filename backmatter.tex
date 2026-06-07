@@ -1,0 +1,35 @@
+%% -*- coding:utf-8 -*-
+\backmatter
+\bookmarksetup{startatroot}
+
+% for PoD with two volumes
+%\ifoot{}\ofoot{}
+%\phantomsection%this allows hyperlink in ToC to work
+%\currentpdfbookmark{Literatur}{references} % adds a PDF bookmark
+\printbibliography 
+\cleardoublepage
+
+\small
+
+
+\phantomsection%this allows hyperlink in ToC to work
+\addcontentsline{toc}{chapter}{Index} 
+\addcontentsline{toc}{section}{\lsNameIndexTitle}
+\ohead{\lsNameIndexTitle}
+%with biblatex
+%\printindex
+%without it 
+\sloppy
+\printindex 
+  
+\phantomsection%this allows hyperlink in ToC to work
+\addcontentsline{toc}{section}{\lsLanguageIndexTitle}
+\ohead{\lsLanguageIndexTitle} 
+\printindex[lan] 
+  
+\phantomsection%this allows hyperlink in ToC to work
+\addcontentsline{toc}{section}{\lsSubjectIndexTitle}
+\ohead{\lsSubjectIndexTitle}
+\printindex[sbj]
+
+\input{crossrefs-index}   

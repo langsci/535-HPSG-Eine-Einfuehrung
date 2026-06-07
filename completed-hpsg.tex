@@ -1,0 +1,95 @@
+%% -*- coding:utf-8 -*-
+\documentclass[output=book
+               ,smallfont
+%                ,series=tbls,
+%		,modfonts
+%		,nonflat
+%		,multiauthors
+%	        ,collection
+%	        ,collectionchapter
+%	        ,collectiontoclongg
+ 	        ,biblatex  
+                ,decapbib
+                ,booklanguage=german
+%                ,babelshorthands
+%                ,showindex
+                ,newtxmath
+%                ,colorlinks, citecolor=brown % for drafts
+                ,draftmode
+% 	        ,coverus
+                ,uniformtopskip
+		  ]{langscibook} 
+
+
+\usepackage{ifthen}
+\provideboolean{draft}
+
+%\newtoggle{draft}\togglefalse{draft}
+\newtoggle{draft}
+%\newtoggle{finished}\togglefalse{finished}
+
+
+
+
+
+% load memoize before german.sty
+
+%\usepackage{nomemoize} 
+\usepackage{memoize} % The figures have been created with an earlier version of texlive. Recreating
+                     % them changes the layout of the pages, so we have to rely on them. Unless ... 16.03.2023
+%\mmzset{readonly}
+% see below for further settings
+
+%\setboolean{draft}{false}\togglefalse{draft}\renewcommand{\itdopt}[1]{}\renewcommand{\todostefan}[1]{}\newcommand{\NOTE}[1]{}
+\setboolean{draft}{true}\toggletrue{draft}\newcommand{\NOTE}[1]{\marginpar{#1}}\newcommand{\LATER}[1]{\marginpar{#1}}
+
+
+\input{localhyphenation.tex} % has to be loaded before german.sty
+\input{localmetadata.tex}
+\input{localpackages.tex}
+\input{localcommands.tex}
+
+
+\input{locallangscifixes.tex}
+
+
+\usepackage[figuresright]{rotating}
+
+\usepackage[german]{varioref}
+% do not stop and warn! This will be tested in the final version
+\vrefwarning
+
+\mmzset{
+  prefix=hpsg.memo.dir/,
+%  deactivate=\todo,
+%  deactivate=\verb,
+}
+
+
+
+
+
+
+
+% \renewcommand{\itd}[1]{}
+% \renewcommand{\itdobl}[1]{}
+% \renewcommand{\itdopt}[1]{}
+
+% \renewcommand{\addpages}{\xspace}
+% \renewcommand{\addsource}{}
+% \renewcommand{\addglosses}{}
+
+
+%\bibliography{germanic}
+\bibliography{bib-abbr,biblio-xdata-en,biblio}
+
+%\includeonly{title-toc,chapters/00-hpsg-vorwort,chapters/01-hpsg-einleitung,chapters/02-hpsg-formalismus,chapters/03-hpsg-valenz-psg,chapters/04-hpsg-komplementation,chapters/05-hpsg-semantik,chapters/06-hpsg-lexikon,chapters/07-hpsg-topologie,chapters/08-hpsg-konstituentenreihenfolge,chapters/09-hpsg-udc,chapters/10-hpsg-rs,chapters/11-hpsg-lokalitaet,chapters/12-hpsg-kongruenz,chapters/13-hpsg-kasus,chapters/14-hpsg-verbalkomplex,chapters/15-hpsg-anhebung,chapters/16-hpsg-passiv,chapters/17-hpsg-partikel,chapters/18-hpsg-morphologie,chapters/19-hpsg-theorie}
+
+
+\input hpsg-lehrbuch-include
+
+\end{document}
+
+%%% Local Variables:
+%%% TeX-command-extra-options: "-shell-escape"
+%%% End:

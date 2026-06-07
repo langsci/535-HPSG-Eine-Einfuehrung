@@ -1,0 +1,189 @@
+%% -*- coding:utf-8 -*-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%   $RCSfile: errata.tex,v $
+%%  $Revision: 1.1 $
+%%      $Date: 2003/09/22 15:43:23 $
+%%     Author: Stefan Mueller (DFKI)
+%%    Purpose: 
+%%   Language: LaTeX
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% $Log: errata.tex,v $
+%% Revision 1.1  2003/09/22 15:43:23  stefan
+%% started
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[headings=small,bibliography=totoc,index=totoc,%
+toc=left,
+%oneside,% Stauffenburg Style
+10pt,%    Stauffenburg Style 
+cleardoublepage=empty % Stauffenburg Style, LaTeX prints heading
+%,draft
+]{scrbook}
+
+
+\usepackage{etex}
+
+%\usepackage{layout} % to visualize the layout of a document
+
+\usepackage[latin1,utf8x]{inputenc}
+
+
+\usepackage[T1]{fontenc}
+\usepackage{times}
+
+
+% für JPs cat
+%\usepackage[T1]{tipa}
+\usepackage{tipa}
+
+\usepackage{amssymb}
+
+\usepackage{multicol}
+
+%% \setlength{\textwidth}{130mm}
+%% %\setlength{\textheight}{187mm}
+%% \setlength{\textheight}{192mm}
+%% \setlength{\headsep}{5mm}
+%% \setlength{\oddsidemargin}{17mm}
+%% \setlength{\evensidemargin}{17mm}
+
+
+%\raggedbottom
+% Fußnoten unten, falls Seite nicht voll
+%\usepackage[bottom,multiple]{footmisc} 
+
+
+\deffootnote{5mm}{0mm}{\textsuperscript{\normalfont\thefootnotemark}}
+
+\widowpenalty = 10000 % keine Hurenkinder
+
+\displaywidowpenalty=10000\relax
+\predisplaypenalty=-200\relax
+
+
+
+\usepackage{jambox}
+\usepackage{stauffenburg}
+
+%\usepackage{array} % muß hier schon geladen werden wegen glossary
+%\usepackage[hyper]{glossary}\makeglossary
+
+\usepackage{german}
+\usepackage[german]{varioref}
+% do not stop and warn! This will be tested in the final version
+%\vrefwarning
+
+
+\usepackage[final]{epsfig}
+\usepackage{graphicx}
+
+\usepackage{tikz-qtree}
+% has strange side effects
+%\tikzset{every tree node/.style={align=left, anchor=north}}
+\tikzset{every roof node/.append style={inner sep=0.1pt,text height=2ex,text depth=0.3ex}}
+
+%% \usepackage{multind}
+%% %\usepackage{myshowidx}
+
+%% \makeindex{subind}
+%% \makeindex{autind}
+%% %\makeindex{wordind}
+
+\newcommand{\mod}{\textsc{mod}\xspace}  % wegen beamer.cls nicht in abbrev.sty
+\newcommand{\rel}{\textsc{rel}\xspace}  % wegen avm.sty in abbrev.sty
+
+\usepackage[figuresright]{rotating}
+
+
+\usepackage{article-ex,makros.2e,
+de-date,de-commands,tree-dvips,pstricks,pst-node,
+datefooter,lastpage,float,comment,my-theorems,soul}
+
+
+\usepackage{my-gb4e-article}
+
+% mit der Index-Version geht die Silbentrennung nicht
+\renewcommand{\word}[1]{\emph{#1}}
+
+\newcommand{\dom}{\textsc{dom}\xspace}
+
+\renewcommand{\nom}{\textit{nom}}
+\renewcommand{\gen}{\textit{gen}}
+\renewcommand{\dat}{\textit{dat}}
+\renewcommand{\acc}{\textit{acc}}
+
+
+\begin{document}
+
+
+\title{Zusätzliche Aufgaben für \emph{Head-Driven Phrase Structure Grammar: Eine Einführung}}
+
+\maketitle
+
+\setcounter{chapter}{21}
+
+
+\section{Einleitung}
+
+\begin{enumerate}
+\item Schreiben Sie eine Phrasenstrukturgrammatik, mit der man u.\,a.\ die Sätze in (\mex{1})
+      analysieren kann, die die Wortfolgen in (\mex{2}) aber nicht zulässt.
+      \eal
+      \ex[]{
+      Ein Kind lacht.
+      }
+      \ex[]{
+      Er gibt einem Kind den Ball.
+      }
+      \ex[]{
+        Sie geben dem Kind kein Eis.
+      }
+      \ex[]{
+      Er denkt an die Ferien.
+      }
+%       \ex[]{
+%       Er wartet neben dem Bushäuschen auf ein Wunder.
+%       }
+      \zl
+      \eal
+      \ex[*]{
+        Dem Kind lacht.
+      }
+      \ex[*]{
+        Er gibt einer Kind den Ball.
+      }
+      \ex[*]{
+        Er geben einem Kind den Ball.
+      }
+      \zl 
+\end{enumerate}
+
+\section{Der Formalismus}
+
+\begin{enumerate}
+\item Wie kann man Fahrräder mit Merkmalstrukturen modellieren?
+
+\end{enumerate}
+
+
+\section{Valenz und Grammatikregeln}
+
+\begin{enumerate}
+\item Geben Sie die Valenzlisten für folgende Wörter an:
+      \eal
+      \ex der
+      \ex auf (in \emph{auf dem Baum})
+      \ex zersägt
+      \ex nachdenke
+      \ex dürstet
+      \zl
+\end{enumerate}
+
+
+\bibliography{biblio}
+
+\end{document}
+
+

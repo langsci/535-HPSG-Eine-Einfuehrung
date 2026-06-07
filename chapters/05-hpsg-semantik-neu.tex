@@ -1,0 +1,108 @@
+%% -*- coding:utf-8 -*-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%   $RCSfile: 5-hpsg-semantik.tex,v $
+%%  $Revision: 1.22 $
+%%      $Date: 2008/09/30 09:14:41 $
+%%     Author: Stefan Mueller (CL Uni-Bremen)
+%%    Purpose: 
+%%   Language: LaTeX
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Semantik}
+\label{Kapitel-sem}\label{Kapitel-Semantik}
+
+
+Innerhalb\is{Semantik|(} der HPSG"=Forschung gibt es drei verschiedene Ansätze
+zur Beschreibung der Bedeutung sprachlicher Ausdrücke. In den ersten
+HPSG"=Arbeiten \citep{ps,ps2,Mueller99a} und auch in einigen Umsetzungen 
+innerhalb der Computerlinguistik wurde die Situationssemantik
+\citep*{BP83a,CMP90,Devlin92}\nocite{BP87a} verwendet.
+Eine Publikation neueren Datums, die ebenfalls Situationssemantik verwendet,
+ist \citew{GSag2000a-u}. Arbeiten neueren Datums nutzen sogenannte
+Unterspezifikationssemantik. Dazu zählen die \emph{Lexical Resource Semantics} (LRS,
+\citealt{RS2004a-u}) und die \emph{Minimal Recursion Semantics}\is{Minimal Recursion Semantics@\emph{Minimal Recursion Semantics} (MRS)}
+(MRS) \citep*{CFPS2005a}. Während die LRS hauptsächlich in Frankfurt/Main verwendet wird, ist MRS
+weiter verbreitet. MRS wird in theoretische Arbeiten (\zb \citew{Kiss2001a}) benutzt, aber auch in
+Computerimplementationen und Übersetzungssystemen \parencites{BFO2002a-u}{MuellerCoreGram}. MRS ist für computerlinguistische Systeme gut geeignet, da
+Skopusbeziehungen\is{Skopus} unterspezifiziert dargestellt werden können, was eine effizientere
+Verarbeitung der Grammatiken durch Computer ermöglicht.
+Das folgende Kapitel führt in MRS ein.
+
+Dieses Buch ist ein Syntax"=Buch. Syntax ist ein komplexes System und die Beschäftigung damit
+faszinierend. Allerdings ist Syntax allein im wahrsten Sinne des Wortes sinnlos. Die (Morpho-)Syntax wird nur gebraucht, um eine
+Verbindung zwischen der lautlichen Form einer Äußerung und ihrer Bedeutung herzustellen: Eine
+Höhrer*in ist nur in der Lage herauszufinden, was eine Sprecher*in mit ihrer Äußerung meint, wenn
+sie in der Lage ist, die Laute in Wörter und Wortgruppen zu strukturieren und einzelnen Wörtern,
+größeren Einheiten und schließlich dem gesamten komplexen Gebilde
+eine Bedeutung zuzuordnen, \dash aus der Bedeutung einzelner Wörter, die Bedeutung der gesamten
+Äußerung zu ermitteln. Wenn es die Aufgabe der Syntax ist, entsprechende Strukturen bereitzustellen,
+muss man als Grammatiker*in auch sagen können, wie Bedeutung repräsentiert wird und wie die
+Bedeutungskomposition mittels syntaktischer Strukturen funktioniert. In jedem Grammatikframework
+muss es dazu Überlegungen geben. Verglichen mit anderen Theorien wird bei vielen HPSG"=Arbeiten über Syntax und Semantik eines
+bestimmten Phänomens gesprochen.
+
+\section{Relationen und ihre Repräsentation in Merkmalbeschreibungen}
+
+
+
+
+
+\section{Linking}
+
+
+\section{Komposition}
+
+\section{Quantorenskopus}
+
+
+
+
+%\section*{Kontrollfragen}
+
+\questions{
+\begin{enumerate}
+\item Was versteht man unter Linking?
+\item Wie wird in der HPSG eine Verbindung zwischen Form und Bedeutung eines (komplexen)
+      sprachlichen Zeichens hergestellt?
+\end{enumerate}
+}
+
+%\section*{Übungsaufgaben}
+
+\exercises{
+\begin{enumerate}
+\item Wie kann man den semantischen Beitrag von \emph{lacht} repräsentieren? Geben Sie den
+  Lexikoneintrag für \emph{lacht} an und berücksichtigen Sie das Linking.
+\item Geben Sie die vollständige Merkmalbeschreibung für die Wortfolge in (\mex{1}), wie sie in
+  \emph{dass er lacht} vorkommt,  an: 
+      \ea
+      er lacht
+      \z
+      Dabei soll sowohl die syntaktische Struktur als auch der Bedeutungsbeitrag berücksichtigt werden.
+
+\item Laden Sie die zu diesem Kapitel gehörende Grammatik von der Grammix"=CD
+(siehe Übung~\ref{uebung-grammix-kapitel4} auf Seite~\pageref{uebung-grammix-kapitel4}).
+Im Fenster, in dem die Grammatik geladen wird, erscheint zum Schluß eine Liste von Beispielen.
+Geben Sie diese Beispiele nach dem Prompt ein und wiederholen Sie die in diesem Kapitel besprochenen
+Aspekte.
+\end{enumerate}
+}
+
+
+
+
+\furtherreading{
+\citet{KR2024a} geben einen Überblick über Semantik im Rahmen der HPSG. \citet{DKW2024a}
+beschäftigen sich mit Argumentstruktur und Linking.
+
+Der Artikel von
+\citet{CFPS2005a} stellt MRS vor. Ich kann mich erinnern, dass ich in den 90ern diesen Artikel nicht
+verstehen konnte, obwohl ich an einer Grammatik gearbeitet habe, die eine MRS enthielt. Ich habe
+damals gemeinsam mit Walter Kasper an der deutschen \Verbmobil"=Grammatik gearbeitet. Das Buch von
+\citet{BB2005a} hat mir sehr dabei geholfen, die Grundidee von Semantikframeworks mit
+Unterspezifikation zu verstehen. Das Buch kommt mit einer Prolog"=Implementation der entsprechenden
+Grammatikfragmente, so dass man Dinge selbst ausprobieren kann. Ich hoffe, dass das hier vorliegende
+Kapitel verständlich und einfach genug ist. Wenn das nicht der Fall ist, können vielleicht
+\citeauthor{BB2005a} helfen oder der Originalartikel von \citeauthor{CFPS2005a}.
+
+}

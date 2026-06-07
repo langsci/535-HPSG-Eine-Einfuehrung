@@ -1,0 +1,298 @@
+%% -*- coding:utf-8 -*-
+
+\chapter{Vorwort}
+
+Seit 1994 unterrichte ich die Kopfgesteuerte Phrasenstrukturgrammatik (Head-Driven Phrase
+Structure Grammar). In den ersten Jahren habe ich dazu ein Vorlesungsskript verwendet, das
+dann in \citew{Mueller99a} eingeflossen ist. Dieses Buch ist allerdings komplex und
+für eine Einführung wohl weniger geeignet. Ich habe mich also entschlossen, ein Lehrbuch zu
+schreiben, das sich auf das Wesentliche konzentriert und Problemfälle nicht erörtert.
+
+Das Buch sollte für alle verständlich sein, die mit Wortarten und dem Valenzbegriff vertraut
+sind. Nach der Lektüre dieses Buches soll der Leser bzw.\ die Leserin in der Lage sein, aktuelle
+HPSG"=Publikationen zu verstehen. Ziel ist es deshalb, die aktuelle Merkmalsgeometrie zu motivieren
+und darzustellen, wie zentrale Konzepte wie Valenz und Selektion, Modifikation und lexikalische
+Prozesse modelliert werden.
+
+In jedem der Kapitel wird ein bestimmter Aspekt der Theorie behandelt, weshalb die Kapitel teilweise
+recht kurz sind. Die Kapitel bestehen aus der Besprechung des jeweiligen Aspekts, eventuell einer
+Diskussion alternativer Theorien, einem kurzen Abschnitt mit Kontrollfragen, einem Abschnitt
+mit Übungsaufgaben und bei einigen Kapiteln Hinweisen zu weiterführender Literatur. Die Diskussion
+alternativer Theorien ist für die fortgeschrittene Leser*in gedacht, 
+dem eine Bewertung der HPSG im gegenwärtigen Forschungsumfeld wichtig ist. Die Argumentation
+bezieht sich mitunter auf Konzepte, die in diesem Buch nicht ausführlich dargestellt werden können.
+Es gibt dann immer Verweise auf weiterführende Literatur. Für einen ersten Überblick über
+die HPSG kann man die Diskussionsabschnitte überspringen und eventuell später beim vertiefenden
+Lesen zu einzelnen Abschnitten zurückkehren.
+%\largerpage[3]
+
+Zu diesem Buch gehört ein Foliensatz, der unter 
+\url{https://hpsg.hu-berlin.de/~stefan/Lehre/HPSG/}
+verfügbar ist. Die \LaTeX-Quellen für die Folien befinden sich auf
+\url{https://github.com/stefan11/HPSG-Folien-Deutsch/}. Der Quelltext für dieses Buch findet sich
+unter dem im Impressum angegebenen Link.
+Von der erstgenannten Seite gelangt man auch zu einer Seite, die computerverarbeitbare
+Grammatiken enthält, die den jeweiligen Kapiteln in diesem Buch entsprechen. Eine virtuelle Maschine, die
+alle zum Grammatikentwickeln benötigte Software und auch die Grammatiken enthält, ist unter
+\url{https://hpsg.hu-berlin.de/Software/Grammix/} verfügbar. Alternativ gibt es
+Installationsanweisungen für verschiedene Betriebssysteme. Der interessierten Leser*in
+wird nahegelegt, sich mit den Grammatiken zu beschäftigen, da das anschaulicher ist,
+als es jeder noch so gute Text sein könnte.
+
+\section*{Benutzte Korpora}
+
+Die meisten der Beispiele in diesem Buch sind Belege aus der {\em taz}\footnote{
+\url{http://www.taz.de/}, 24.02.2026.}, einer überregionalen
+deutschen Tageszeitung. Andere sind aus dem Magazin \emph{Der Spiegel},
+aus der Computerzeitschrift c't oder aus der \emph{zitty}, einer kleinen Zeitschrift mit
+Veranstaltungshinweisen aus Berlin. 
+%% Auch Beispiele aus Romanen oder wissenschaftlichen Texten über
+%% Linguistik wurden berücksichtigt. I have also considered examples from novels
+%% and some from scientific texts on linguistics. Of course, it is clear to
+%% me that the language of linguists changes according to their research topic
+%% and according to the theories they have at a certain stage, but in many cases
+%% I have quoted examples that show that a claim of the author is wrong and this excludes
+%% the possibility that the production of the respective sentences was influenced
+%% by the author's theoretical work.
+
+
+Es ist sehr bequem, elektronische Korpora zu verwenden, um bestimmte Behauptungen zu rechtfertigen
+oder zu widerlegen.
+Für diese Zwecke habe ich die taz-CD"=Roms benutzt, die über 20 Jahrgänge der Zeitung enthalten.
+Außerdem habe ich das \cosmas"=Korpus\footnote{\url{https://cosmas2.ids-mannheim.de/cosmas2-web/}, 21.07.2024.} 
+verwendet, das vom Institut für Deutsche Sprache (IDS) Mannheim zur Verfügung gestellt
+wird. Die Version, die über das World Wide Web zugänglich ist, enthält 1,489 Milliarden Wörter.
+Neben \cosmas habe ich das \negra{}\hyp Korpus der Universität Saarbrücken,
+% \footnote{
+% \url{http://www.coli.uni-sb.de/sfb378/negra-corpus/}}
+das Tiger"=Korpus des Instituts für maschinelle Sprachverarbeitung der Universität Stuttgart,
+%\footnote{\url{http://www.ims.uni-stuttgart.de/projekte/TIGER/TIGERCorpus/}}
+und das Digitale Wörterbuch der deutschen Sprache\footnote{\url{http://www.dwds.de/}, 21.07.2024.} der 
+Berlin"=Brandenburgischen Akademie der Wissenschaften benutzt.
+
+~\medskip
+
+\noindent
+Bremen, 12.\ Februar, 2007\hfill Stefan Müller
+
+\section*{Vorwort zur zweiten Auf"|lage}
+
+Die zweite Auf"|lage unterscheidet sich nur geringfügig von der ersten. Ich habe einige
+Literaturverweise ergänzt und einige erklärende Sätze eingefügt. Die Diskussion der
+vererbungsbasierten Analyse des Passivs in Abschnitt~\ref{sec-vererbung-koenig} habe ich geändert und
+die Beispiele aus dem Yukatekischen\il{Yukatekisch} durch Beispiele aus dem Türkischen\il{Türkisch}
+ersetzt. Zur Motivation siehe \citew[\page 387]{Mueller2007d}. Die Analyse von Zeitausdrücken im
+Akkusativ wurde entfernt, da man sie nicht -- wie in der ersten Auf"|lage vorgeschlagen -- an Lexikoneinträgen festmachen kann 
+(siehe S.\,\pageref{bsp-den-groessten-Teil-der-Woche}).
+
+
+~\medskip
+
+\noindent
+Berlin, 01.\ August, 2008\hfill Stefan Müller
+
+\section*{Vorwort zur dritten Auf"|lage}
+
+Die wichtigste Änderung von der zweiten zur dritten Auf"|lage besteht in einer Anpassung des
+Kopf"=Argument"=Schemas. Ich verwende jetzt nicht mehr die \emph{del}"=Relation sondern
+\emph{append} \citep[Abschnitt~8.4]{MuellerGTBuch1}. Das ermöglicht eine einfache sprachübergreifende Analyse der Konstituentenstellung
+\parencites[228]{MuellerPredication}{MuellerCopula}. Die entsprechenden Analysen haben sich im CoreGram"=Projekt\footnote{
+  \url{https://hpsg.hu-berlin.de/Projects/CoreGram.html}. Zu einer Beschreibung des Projekts siehe \citew{MuellerCoreGram}. Das CoreGram"=Projekt beschäftigt sich mit der Implementation von Grammatiken für so
+verschiedene Sprachen wie Deutsch, Dänisch\il{Dänisch}
+\citep{MOe2011a,MuellerPredication,MuellerCopula,MOe2013a,MOeDanish}, Englisch\il{Englisch}
+\citep{MuellerPredication,MuellerCopula,MOe2013a,MuellerLFGphrasal}, Jiddisch\il{Jiddisch} \citep{MOe2011a}, Spanisch\il{Spanisch}, Französisch\il{Französisch},
+Maltesisch\il{Maltesisch} \citep{MuellerMalteseSketch},
+Persisch\il{Persisch} \citep{MuellerPersian,MG2010a} und Mandarin Chinesisch\il{Mandarin Chinesisch} \citep{Lipenkova2009a,ML2009a,Lu2021a,LM2027a}.
+}, bewährt. 
+
+Wir haben uns entschlossen, die CD-Rom, die bisher mit dem Buch zusammen ausgeliefert wurde, nicht
+mehr gemeinsam mit dem Buch zu vertreiben. Die Grammix-CD \citep{Mueller2007b} ist im Netz verfügbar\footnote{
+  \url{https://hpsg.hu-berlin.de/Software/Grammix/}
+} und die Netzverbindungen sind inzwischen so gut, dass man sich CDs herunterladen kann. Denjenigen,
+die über keine ausreichend schnelle Internetanbindung verfügen, schicken wir gern eine CD zu (bitte
+mein Sekretariat kontaktieren). 
+Die Änderung des Kopf"=Argument"=Schemas ist auf der Grammix"=CD in der gegenwärtig auf der
+Webseite verfügbaren Version noch nicht enthalten. Die Grammix"=CD
+wird komplett umgestaltet: Es wird ein neues Betriebssystem geben, eine neue wesentlich verbesserte
+und effizientere Version von TRALE und die Grammatiken aus dem CoreGram"=Projekt. Ich hoffe, die
+Arbeiten an der neuen Version der CD noch vor der Fertigstellung des Berliner Flughafens abschließen
+zu können.\footnote{Fußnote aus der Zukunft: Bis zur Eröffnung des BER am 31.10.2020 war noch
+  ausreichend Zeit. 2013, also sieben Jahre vor der Eröffnung des BER, habe ich eine Virtuelle
+  Maschine mit Grammix zum Download bereitgestellt.} Die angepassten Lehrbuchgrammatiken und die Grammatiken aus dem CoreGram"=Projekt sind
+aber bereits jetzt über meine Webseite zugänglich.
+
+Der Abschnitt~\ref{sec-vererbung-koenig} zur vererbungsbasierten Analyse des Passivs wurde nochmals
+überarbeitet und enthält jetzt auch eine Diskussion von Doppelpassivierungen\footnote{
+  Anmerkung vom 24.02.2026: Bei den Konstruktionen handelt es sich um Interaktionen aus Passiv und
+  Impersonalkonstruktion \citep{Blevins2003a}. Sie sind dennoch für vererbungsbasierte Analysen
+  problematisch und werden im Abschnitt~\ref{sec-vererbung-koenig} jetzt nach aktuellem Kenntnisstand besprochen.
+} im Türkischen\il{Türkisch} und
+anderen Sprachen. Außerdem habe ich im Abschnitt~\ref{sec-spr} etwas erklärenden Text und eine
+Abbildung hinzugefügt. Die Diskussion des \textsc{mother}"=Merkmals im Kapitel~\ref{Kapitel-Lokalität} wurde erweitert und auf
+den Stand von \citew{MuellerGTBuch1} bzw.\ \citew{MuellerGTBuch2} gebracht. 
+Ein Fehler in den Schemata~\ref{schema-bin-mark} und~\ref{schema-bin-mark-final} wurde korrigiert.
+
+Es gibt jetzt einen Anhang mit Lösungen zu ausgewählten Übungsaufgaben.
+
+
+~\medskip
+
+\noindent
+Berlin, 23. Januar 2013\hfill Stefan Müller
+
+
+\section*{Vorwort zur vierten Auf"|lage}
+
+Dieses Buch hat eine lange Geschichte. Es ist in den Jahren 2005–2006 aus Folien entstanden, die ich
+ab 1994 für die Lehre benutzt habe. Meine Dissertation habe ich 1999 bei Niemeyer
+veröffentlicht. Das Buch war bis zur Veröffentlichung auf meiner Webseite verfügbar. Danach musste
+ich es von der Webseite entfernen. Die Veröffentlichung war also eine Entöffentlichung. Der Preis
+war mit 186\,DM für 486 Seiten prohibitiv hoch: Privatpersonen dürften sich das Buch höchst selten
+gekauft haben. Inzwischen wurde Niemeyer von De Gruyter geschluckt und De Gruyter bietet das Buch für 150\,€
+an. Das Buch habe ich selbst geschrieben und komplett selbst gesetzt. Mit meinem neuen Buch sollte das nicht passieren,
+weshalb ich vorhatte, es bei einem unbekannten Print-On-Demand-Verlag zu veröffentlichen. Auf einer
+Konferenz sprach ich mit Brigitte Narr über meine Pläne und sie sagte: "`Machen Sie das
+nicht!"'. Wir kamen überein, dass ich das Buch im Stauffenburg-Verlag veröffentliche und es
+gleichzeitig auf meiner Webseite lassen kann. Ich habe Frau Narrs Kontonummer auf meiner Webseite
+angegeben und weiß von einigen berühmten Grammatikern, dass sie Frau Narr auch Geld überwiesen
+haben. (Andere Grammatiker*innen waren so freundlich Frau Narr darauf hinzuweisen, dass ich das Buch
+kostenlos zum Download auf meiner Webseite anbiete \ldots). 
+
+Ich habe dann auch mein Grammatiktheorie"=Buch im Stauffenburg"=Verlag veröffentlicht. Ab 2012 habe
+ich gemeinsam mit Martin Haspelmath und mit der Unterstützung von vielen, vielen Linguist*innen
+weltweit (u.\,a.\ Chomsky, Pinker, Goldberg) begonnen, einen wissenschaftsgeführten Diamond Open
+Access-Verlag aufzubauen \citep{MuellerOA}.\footnote{Diamond Open Access bedeutet, dass weder die Autor*innen noch die
+Leser*innen für die Veröffentlichungen bezahlen müssen.%
+% Stattdessen wird Language Science Press von über 100
+%Universitäten weltweit finanziert.
+} Seit 2014 gibt es Language Science Press. Ab diesem Zeitpunkt habe ich
+auch meine Bücher dort veröffentlicht. 
+
+Im April 2024 habe ich Frau Narr gefragt, ob ich die Rechte an diesem Buch zurückbekommen könnte,
+und sie hat eingewilligt. Das Buch ist jetzt also wie fast alle meine Bücher frei und ich kann es
+unter der CC-BY-Lizenz bei Language Science Press veröffentlichen. Ich habe ihr dieses Buch
+gewidmet. Leider hat sie die Veröffentlichung nicht mehr erleben können.
+
+Seit der letzten Auf\/lage 2013 hat sich einiges getan. Ich habe mich weiter mit sprachübergreifenden Fragestellungen
+beschäftigt und ein Buch über germanische Sprachen veröffentlicht \citep{MuellerGermanic}. Dort habe
+ich alle germanischen Sprachen so analysiert, dass die Verben in den jeweiligen Sprachen dieselbe
+Argumentstruktur haben. Zum Beispiel sind die Gegenstücke zum deutschen \emph{geben} ebenfalls
+dreistellig. Die Argumentstrukturen unterscheiden sich lediglich in den Kasus: Das Englische hat keinen
+Dativ; die Sprachen haben unterschiedliche Verteilungen von strukturellem und lexikalischem
+Kasus. Ich nehme, wie in neueren Arbeiten üblich, eine Argumentstruktur"=Liste (\argst) an, in der 
+alle Argumente eines Kopfes enthalten sind. Die Argumente werden von dieser Repräsentation auf
+Valenzmerkmale gemappt. Diese sind \spr für Spezifikatoren und \comps für Komplemente. Die
+Reihenfolge der drei Argumente in der \argst ist für alle germanischen Sprachen gleich. Sie
+entspricht der Normalstellung im Deutschen (bei den meisten Verben Nominativ, Dativ, Akkusativ) und der Stellung im
+Englischen:
+\eal
+\ex dass er dem Affen den Stock gibt
+\ex that he gives the monkey the stick
+\zl
+Das ist ein Unterschied zu früheren Auf"|lagen des Buches, in denen die Elemente in der Valenzliste
+\subcat in der Reihenfolge Nominativ, Akkusativ, Dativ angeordnet waren. Die Einführung in
+Phrasenstrukturgrammatiken und die Analyse der Linearisierungstheorien in Abschnitt~\ref{sec-konstituentenreihenfolge-alternativen} wurden an
+diese veränderte Grundreihenfolge angepasst.
+
+Das Semantik"=Kapitel wurde komplett überarbeitet. Statt der Situationssematik \citep*{BP83a,CMP90,Devlin92}, die in den ersten
+drei Auf\/lagen des Buches verwendet wurde, gibt es im Kapitel~\ref{Kapitel-Semantik} nun eine
+Einführung in die Minimal Recursion Semantics\indexmrs \citep*{CFPS2005a}.
+
+Ansonsten habe ich das Buch jetzt auf neue Rechtschreibung umgestellt, ich habe begonnen zu gendern
+und habe die meisten Beispiele so abgeändert, dass es keine Gender-Stereotypen mehr gibt
+\citep{MB97a,PCKSDMC2017a}. Für das Deutsche ist das leider nicht so einfach, weil man auf die
+Verwendung von Maskulina angewiesen ist, denn nur bei diesen ist der Kasus voll ausbuchstabiert. 
+
+Ich habe an Stellen, wo das noch nicht der Fall war, bei Literaturquellen Seitenzahlen hinzugefügt.
+
+Im Abschnitt~\ref{Abschnitt-phrasale-Valenz} gibt es als Teil des Kapitels über Valenz eine Diskussion darüber, ob lexikalisch kodierte Valenz oder phrasal
+lizenzierte Ansätze adäquater sind. Die Diskussion über Alternativen im Lexikonkapitel wurde
+ebenfalls ausgebaut und ein Abschnitt über Erzwingung (Coercion) hinzugefügt (Abschnitt~\ref{sec-Erzwingung}).
+
+Ich habe das \textsc{dtrs}-Merkmal eingeführt, das wie bei \citet[29--30]{GSag2000a-u} alle Töchter
+enthält. Dadurch wird es möglich, Prinzipien allgemeiner zu formulieren, und man kann
+Generalisierungen bzgl.\ Verbzweitsätzen und Relativ- und Interrogativnebensätzen erfassen. Das
+\textsc{non-head-dtrs}-Merkmal braucht man nicht mehr.
+
+Die Satztypenanalyse in Abschnitt~\ref{sec-semantik-v1-v2} wurde komplett überarbeitet. Statt einer Relation wird jetzt
+das \textsc{mode}"=Merkmal verwendet.
+
+Der Abschnitt~\ref{sec-Crysmann} wurde gekürzt und der Abschnitt~\ref{sec-Wetta} über Wettas Analyse der scheinbar mehrfachen
+Vorfeldbesetzung wurde neu aufgenommen. Der letztgenannte Abschnitt ist aus dem englischen Manuskript zur
+deutschen Satzstruktur entstanden \citep{MuellerGS}, das schon längst veröffentlicht sein sollte.
+
+Der Abschnitt~\ref{sec-np-kongruenz} zur Subjekt-Verb-Kongruenz wurde vereinfacht. Bisher wurde in
+den Lexikoneinträgen immer noch die Semantik der Verben angegeben. Das ist jedoch gar nicht nötig,
+denn der Index des Subjekts ist ja ohnehin in der \argstl enthalten und Beschränkungen für
+Subjekt-Verb-Kongruenz werden auch in Bezug auf die \argstl formalisiert.
+
+Im Kapitel~\ref{Kapitel-passiv} habe ich die Diskussion unakkusativischer Verben erweitert und um
+eine Zusammenfassung ergänzt, so dass ganz klar ist, welche Tests anwendbar sind und welche nicht.
+Die Partizipien I waren bisher nicht einheitlich analysierbar. Durch die Verwendung von \argst wurde das zum
+ersten Mal möglich. Siehe Abschnitt~\ref{sec-adj-formation} zu den Details.
+
+% ein Komma und Optionalität bei Valenz von denken
+% Bei Anja Herrmann bedanke ich mich für den Hinweis auf Typos und Fragen zu den Übungsaufgaben.
+
+% 23.05.2022 Im Kausus-Kapitel Verweis auf 2 statt auf 1. Karla Jerabeck hats gefunden.
+% 19) a. Er goß ihr die Blumen.
+%     b. Er zündete ihr das Haus an.
+% Wegener (1985a) hat jedoch gezeigt, dass diese Dative Komplementstatus haben.
+%
+% Erklären, wieso Komplementstatus.
+
+% Lexikon Typhierarchie statt acc dat. 03.06.2024
+
+% Den Kindern wurde geholfen -> Den Kindern wird geholfen.
+% Beispiele wurden fehlerhaft Haider zugeschrieben. 07.06.2024
+
+% 11.06.2024
+% Bei Lösungen wurde der Numerus-Wert bei der Adjektivlexikonregel entfernt. Dieser
+% wird von der Endung bestimmt, die beim attributiven Adjektiv angehängt wird. Kasus und Genus
+% wurden in der Aufgabenstellung wieder eingebaut, aber mit Anmerkung versehen, dass sie weggelassen
+% werden sollen.
+
+%21.06.2024 
+
+% Reihenfolge im Abschnitt über Linearisierungstheorien wurde an nom, dat, acc angepasst.
+
+% To do:
+%
+% Sophie Reule, Studentin 22.01.2018
+% Auf S. 74 des HPSG-Lehrbuchs werden die Elemente der Liste Phon durch Kommata getrennt, zuvor war
+% dies nicht der Fall. Welche Bedeutung hat die Notation an dieser Stelle? 
+
+% 
+% Auf Seite 75 wird vom SYNSEM-Wert gesprochen, der wurde aber gar nicht eingeführt.
+
+% Wert von PSOA-ARG ist eine Liste, also muss Mörder in eine Liste in (21) Kapitel 6.4
+
+% 17.05.18 Auf S. 282 war ein "ist" doppelt.
+
+% 28.08.2018 Steve Wechsler: Kongruenzmerkmale des Nomens müssen Kopfmerkmale sein,
+% denn wenn es Depiktive gibt, die mit Nomina kongruieren, müssen deren CONCORD-Merkmale nach außen
+% verfügbar sein.
+
+%On p.237 of your HPSG Lehrbuch (3rd edition) you're saying:
+
+%% Przepiórkowski (1999a) integriert deshalb Meurers Ansatz der Kasuszuweisung (1999b;
+%% 2000, Kapitel 10.4.1.4) in seine Theorie und führt zusätzlich zum REALIZED -Merkmal das
+%% Merkmal RAISED ein, das den Wert + hat, wenn ein Argument angehoben wird, und den
+%% Wert −, wenn das nicht der Fall ist.
+
+%% The following part is false:
+
+%% führt zusätzlich zum REALIZED -Merkmal das Merkmal RAISED ein
+
+%% Rather, RAISED replaces REALIZED.
+
+%% Please, remember when you prepare the 4th edition ;-)
+
+% 03.05.2025 
+% Oliva92b statt Oliva92a zitiert. COLING-Paper ist verfügbar, CLAUS-Report nicht mehr
+
+
+~\medskip
+
+\noindent
+Berlin, \today\hfill Stefan Müller

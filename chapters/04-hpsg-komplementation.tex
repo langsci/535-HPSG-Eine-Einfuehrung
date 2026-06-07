@@ -1,0 +1,814 @@
+%% -*- coding:utf-8 -*-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%   $RCSfile: 4-hpsg-komplementation.tex,v $
+%%  $Revision: 1.20 $
+%%      $Date: 2007/02/13 11:00:11 $
+%%     Author: Stefan Mueller (CL Uni-Bremen)
+%%    Purpose: 
+%%   Language: LaTeX
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{Dominanzstrukturen und Prinzipien}
+\label{Kapitel-komplementation}
+
+In diesem Kapitel wird genauer auf die Repräsentation von Grammatikregeln
+im Formalismus der HPSG eingegangen. Es wird gezeigt, wie Bäume mittels Merkmalbeschreibungen
+repräsentiert werden können. Typhierarchien werden zur Klassifikation verschiedener
+Grammatikregeln benutzt, und es wird gezeigt, wie Generalisierungen in Bezug
+auf Grammatikregeln erfasst werden können. Die Lexikoneinträge, die bisher verwendet wurden,
+werden stärker strukturiert, so dass es möglich wird, die Projektion
+%% \NOTE{Sollte das noch irgendwo rein?
+%%   Unter Projektion\is{Projektion} versteht man in der Linguistik das Übertragen von Merkmalen von einer Kategorie
+%%   auf eine diese unmittelbar dominierende Kategorie. Bei einer Übertragung von Information in die
+%%   andere Richtung spricht man von Perkolation\is{Perkolation}. Wie sich zeigen wird, ist es in der
+%%   HPSG nicht sinnvoll, die Richtungen zu unterscheiden, da Projektion/""Perkolation durch
+%%   Strukturteilung modelliert wird. Die Information ist einfach identisch, und es ist nicht sinnvoll,
+%%   über eine Richtung der Informationsweitergabe zu sprechen.%
+%% } 
+von Merkmalen, die für Phrasen wichtig sind, elegant zu beschreiben. 
+
+\section{Die Modellierung von Konstituentenstruktur mit Hilfe von Merkmalstrukturen}
+
+Wie bereits angedeutet, dienen Merkmalbeschreibungen in der HPSG
+als einheitliches Beschreibungsinventar für morphologische Regeln, Lexikoneinträge
+und syntaktische Regeln. Die Bäume, die bisher zu sehen waren, sind nur Visualisierungen
+der Zusammenhänge, sie haben keinen theoretischen Status. Genauso gibt es
+in der HPSG keine Ersetzungsregeln.\is{Phrasenstrukturgrammatik}\footnote{
+  In vielen Computerimplementationen zur Verarbeitung von HPSG"=Grammatiken werden
+  zur Verbesserung der Verarbeitungsgeschwindigkeit allerdings Phrasenstrukturregeln verwendet.}
+Die Funktion der Phrasenstrukturregeln wird von Merkmalbeschreibungen übernommen.
+Man trennt zwischen unmittelbarer Dominanz\is{Dominanz!unmittelbare} (ID) und linearer Präzedenz\is{Präzedenz} (LP).
+Die Dominanzinformation wird mittels \textsc{dtr}"=Merkmalen (Kopf"|tochter und Nicht-Kopf"|töchter)
+repräsentiert, Information über Präzedenz ist implizit in \phon enthalten.
+In diesem Kapitel beschäftigen wir uns nur mit der Dominanz. In einigen Versionen der
+HPSG gibt es Listen von Töchtern, die in der Reihenfolge angeordnet sind, wie sie auch in den
+entsprechenden Wortgruppen vorkommen. Ich verwende hier ein \dtrs"=Merkmal und auch das
+\dom"=Merkmal, das im Abschnitt~\ref{sec-Reape-Linearisierung} noch genauer besprochen werden wird, enthält die Töchter in
+geordneter Reihenfolge. In diesem Kapitel beschäftigen wir uns im Wesentlichen mit der Dominanz. Zu Abfolgebeschränkungen
+wird im Kapitel~\ref{Kapitel-Konstituentenreihenfolge} mehr gesagt.
+(\mex{1}) zeigt die Repräsentation der \phonwe in einer Merkmalbeschreibung, die dem Baum in
+Abbildung~\vref{fig-dem-Eichhörnchen} entspricht.
+\begin{figure}
+\centerline{%
+\begin{forest}
+sm edges
+[NP
+  [Det [dem]]
+  [N
+    [Eichhörnchen]]]
+\end{forest}}
+\caption{\label{fig-dem-Eichhörnchen}\emph{dem Eichhörnchen}}
+\end{figure}
+\ea
+\ms{ 
+  phon     & \phonliste{ dem, Eichhörnchen }\\[1mm]
+  head-dtr & \onems{ phon \phonliste{ Eichhörnchen }  \\
+                 }\\
+  non-head-dtrs & \liste{ \onems{ phon \phonliste{ dem } \\
+                            }}\\
+}
+\z
+In (\mex{0}) gibt es genau eine Kopf"|tochter (\textsc{head-dtr}\isfeat{head-dtr}).
+Die Kopf"|tochter ist immer die Tochter, die den Kopf enthält. In einer Struktur mit den Töchtern 
+\emph{das} und \emph{Bild von Maria} wäre \emph{Bild von Maria} die Kopf"|tochter,
+da \emph{Bild} der Kopf ist. Es kann im Prinzip mehrere Nicht"=Kopf"|töchter geben. 
+Würde man wie in Abbildung~\vref{fig-Aicke-dem-Affen-den-Stock-gibt-flat} flache Strukturen
+für einen Satz mit einem ditransitiven finiten Verb annehmen, hätte man \zb drei Nicht"=Kopf"|töchter.\isfeat{non-head-dtrs}
+
+Wie oben schon gesagt, ist in (\mex{0}) keine Information zur Abfolge der Kopftochter und der
+Nicht-Kopftochter enthalten. Die \dtrsl enthält die Töchter in Abfolge, in der sie auch in einer
+Phrase vorkommen. Für das Eichhörnchen"=Beispiel ergibt sich Folgendes:
+\ea
+\onems{ 
+  phon      \phonliste{ dem, Eichhörnchen }\\[1mm]
+  head-dtr  \ibox{1} \\
+  non-head-dtrs  \nliste{ \ibox{2} }\\
+  dtrs  \liste{ \ibox{2} \onems{ phon \phonliste{ dem } }, \ibox{1} \onems{ phon \phonliste{ Eichhörnchen } } }\\
+}
+\z
+
+\noindent
+Die Regelschemata (\ref{regelschema-psg-comps}) und (\ref{regelschema-psg-spr}) aus dem vorigen Kapitel -- hier der Übersichtlichkeit
+halber als (\mex{1}) wiederholt -- kann man analog in Merkmalbeschreibungen ausdrücken.
+\ea
+\label{regelschema-psg-comps-zwei}
+\begin{tabular}[t]{@{}l@{~}lll}
+a. & H[\spr \ibox{1}] & $\to$ & \ibox{2}~~~H[\spr \ibox{1}  $\oplus$ \sliste{ \ibox{2} }  ]\\
+b. & H[\comps \ibox{1}] & $\to$ & H[\comps \ibox{1} $\oplus$ \sliste{ \ibox{2} } ]~~~\ibox{2}\\
+\end{tabular}
+\z
+Das folgende Schema zeigt das für das Kopf-Spezifikator-Schema\is{Schema!Kopf"=Spezifikator"=}:
+\begin{schema}[Kopf-Spezifikator-Schema (vorläufige Version)]
+\label{schema-head-specifier-prel}
+\type{head-specifier-phrase}\istype{head"=specifier"=phrase} \impl\\
+\onems{
+      spr \ibox{1} \\
+      head-dtr$|$spr \ibox{1} $\oplus$ \sliste{ \ibox{2} } \\
+      non-head-dtrs \sliste{ \ibox{2} }\\
+      }
+\end{schema}
+Schema~\ref{schema-head-specifier-prel} gibt an,
+welche Eigenschaften ein linguistisches Objekt vom Typ \type{head"=specifier"=phrase} haben muss.
+Der Pfeil\is{\impl} steht in Schema~\ref{schema-head-specifier-prel} für eine Implikation\is{Implikation},
+nicht für den Ersetzungspfeil, wie er in Phrasenstrukturregeln vorkommt. Man kann das Schema also
+wie folgt lesen: Wenn ein Objekt vom Typ \type{head"=specifier"=phrase} ist, muss es die Eigenschaften
+haben, die auf der rechten Seite der Implikation angegeben sind. Konkret heißt das,
+dass solche Objekte immer eine Valenzliste besitzen, die \iboxt{1} entspricht, dass sie eine Kopf"|tochter haben,
+die eine Valenzliste hat, die sich in die zwei Teillisten \ibox{1} und \sliste{ \ibox{2} }
+unterteilen lässt, und dass sie eine Nicht"=Kopf"|tochter haben, die mit dem letzten Element
+in der \compsl der Kopf"|tochter \iboxb{2} kompatibel ist. 
+
+Das Kopf-Komplement-Schema ist genau parallel:
+\begin{schema}[Kopf-Komplement-Schema (vorläufige Version)]
+\label{schema-bin-prel}
+\type{head-complement-phrase}\istype{head"=complement"=phrase} \impl\\
+\onems{
+      comps \ibox{1} \\
+      head-dtr$|$comps \ibox{1} $\oplus$ \sliste{ \ibox{2} } \\
+      non-head-dtrs \sliste{ \ibox{2} }\\
+      }
+\end{schema}
+
+\noindent
+Wie ebenfalls im vorigen Kapitel angemerkt, sind Artikel"=Nomen"=Kombinationen
+und Verb"=NP"=Kombinationen zwei mögliche Instantiierungen für die in (\ref{regelschema-psg-comps-zwei}) angegebenen Schemata:
+\ea
+\begin{tabular}[t]{@{}l@{~}lll}
+a. & N[\spr \ibox{1}] & $\to$ & Det~~~N[\spr \ibox{1}\,\eliste{} $\oplus$ \nliste{ Det } ]\\
+b. & V[\comps \ibox{1}] & $\to$ & V[\comps \ibox{1}\,\eliste{} $\oplus$ \nliste{ NP } ]~~~NP\\
+\end{tabular}
+\z
+Entsprechend kann man die Schemata~\ref{schema-head-specifier-prel} und~\ref{schema-bin-prel} instantiieren und bereits
+mit diesen beiden Dominanzschemata komplexe Strukturen analysieren, die dem Baum in
+Abbildung~\vref{fig-bin-Aicke-dem-Eichhörnchen-die-Nuss-gibt} entsprechen.
+\begin{figure}
+\centering
+\centerline{%
+\begin{forest}
+sm edges
+[V
+  [NP
+    [Aicke]]
+  [V
+    [NP
+      [Det [dem]]
+      [N [Eichhörnchen]]]
+    [V
+      [NP
+        [Det [die]]
+        [N [Nuss]]]
+      [V
+        [gibt]]]]]
+\end{forest}}
+\caption{\label{fig-bin-Aicke-dem-Eichhörnchen-die-Nuss-gibt}Binär verzweigende Kopf-Komplement-Strukturen}
+\end{figure}
+
+Man sieht recht deutlich, dass die Struktur in (\mex{1}) eigentlich dem auf die Seite gelegten
+Baum entspricht.\footnote{
+  \textsc{non-head-dtrs} habe ich mit \textsc{nh-dtrs} abgekürzt.%
+}
+
+\ea
+%\resizebox{\linewidth}{!}{
+\onems{
+phon     \phonliste{ Aicke, dem, Eichhörnchen, die, Nuss, gibt }\\
+head-dtr \onems{
+phon     \phonliste{ dem, Eichhörnchen, die, Nuss, gibt }\\
+head-dtr \onems{
+      phon     \phonliste{ die, Nuss, gibt }\\
+      head-dtr \onems{ phon \phonliste{ gibt }\\
+                       } \\
+      nh-dtrs \liste{ \onems{ 
+                                                  phon     \phonliste{ die, Nuss }\\
+                                                  head-dtr \onems{ phon \phonliste{ Nuss }  \\
+                                                                 }\\
+                                                  nh-dtrs \liste{ \onems{ phon \phonliste{ die } \\
+                                                                              }}\\
+                                                  }
+                       }\\
+}\\
+nh-dtrs \liste{ \onems{ 
+                                                  phon     \phonliste{ dem, Eichhörnchen }\\
+                                                  head-dtr \onems{ phon \phonliste{ Eichhörnchen }  \\
+                                                                 }\\
+                                                  nh-dtrs \liste{ \onems{ phon \phonliste{ dem } \\
+                                                                              }}\\
+                                                  }
+                       }\\
+} \\
+nh-dtrs \liste{ \onems{phon \phonliste{ Aicke }\\
+                       } }\\
+}
+%}
+\z
+Die Struktur in (\mex{0}) enthält nur den Ausschnitt aus der Beschreibung des linguistischen
+Zeichens, der etwas über \phonwe und den Status der Töchter (Kopf"|tochter vs.\ Nicht"=Kopf"|tochter)
+aussagt. (\mex{1}) zeigt einen Ausschnitt mit anderen Details der Struktur wie die Information über Wortart
+und \compsw sowie den Typ der jeweiligen Teilstruktur:
+\ea
+\label{ms-die-Nuss-gibt}
+\onems[head-complement-phrase~]{
+      phon    \phonliste{ die, Nuss, gibt }\\
+      p-o-s \type{verb}\\
+%      spr \eliste\\
+      comps \ibox{1} \liste{ NP[\nom], NP[\dat]} \\
+      head-dtr \onems{ phon \phonliste{ gibt }\\
+                       p-o-s \type{verb}\\
+%                                     spr \eliste\\
+                                     comps \ibox{1}  $\oplus$ \liste{ \ibox{2} } \\
+                       } \\
+      non-head-dtrs \liste{ \ibox{2} \onems[head-specifier-phrase~]{ 
+                                                  phon  \phonliste{ die, Nuss }\\
+                                                  p-o-s \type{noun}\\
+                                                  % acc
+%                                                  spr \eliste\\
+                                                  comps \eliste \\
+                                                  head-dtr \ldots \\
+                                                  non-head-dtrs \ldots \\
+                                                  }
+                       }
+}
+\z
+Natürlich hat die Repräsentation für \emph{die Nuss} selbst wieder eine interne Struktur,
+die aber aus Gründen der Übersichtlichkeit weggelassen wurde.
+Abbildung~\vref{fig-saettigung-valenz} zeigt die Valenzinformation in Baumdarstellung. Die
+\spr-Werte habe ich der Übersichtlichkeit weggelassen.
+
+\begin{figure}
+\centering
+\centerline{%
+\begin{forest}
+sm edges
+[{V[\comps \eliste ]}
+  [{\ibox{1} NP[\type{nom}]}
+    [Aicke]]
+  [{V[\comps \sliste{ \ibox{1} }]}
+    [{\ibox{2} NP[\type{dat}]} 
+      [dem Eichhörnchen, roof]]
+    [{V[\comps \sliste{ \ibox{1}, \ibox{2} }]}
+      [{\ibox{3} NP[\type{acc}]}
+        [die Nuss,roof]]
+      [{V[\comps \sliste{ \ibox{1}, \ibox{2}, \ibox{3} }]}
+        [gibt]]]]]
+\end{forest}}
+\caption{\label{fig-saettigung-valenz}Abarbeitung der Valenzliste des Verbs}
+\end{figure}
+
+
+
+
+
+
+
+\section{Projektion von Kopfeigenschaften}
+\label{sec-kopfeigenschaften}
+
+Auf S.\,\pageref{bsp-projektion-v-merkmale} wurde gezeigt, dass
+die Verbform zu den Merkmalen zählt, die für die Distribution von Verbalprojektionen
+wichtig ist. Die Wortart und Information über Finitheit muss also an der Maximalprojektion
+von Verben wie \emph{gibt} repräsentiert sein. Das verdeutlicht Abbildung~\vref{fig-projektion-head-feat}.
+Die Verbform\isfeat{vform} ist bisher noch gar nicht in Merkmalbeschreibungen enthalten gewesen.
+Eine mögliche Merkmalsgeometrie zeigt (\mex{1}).
+\begin{figure}
+\settowidth{\offset}{V[\type{f}}
+\settowidth{\offsetup}{V[\type{fin}}
+\centerline{
+\begin{forest}
+sm edges, for tree={l+=\baselineskip}
+[V{[\type{fin}, \comps \eliste]}, name=fin1
+	[\ibox{1} NP{[\type{nom}]}
+		[Aicke]]
+	[V{[\type{fin}, \comps \sliste{ \ibox{1} }]}, name=fin2
+		[\ibox{2} NP{[\textit{dat}]}
+			[dem Eichhörnchen,roof]]
+		[V{[\type{fin}, \comps \sliste{ \ibox{1}, \ibox{2} }]}, name=fin3
+			[\ibox{3} NP{[\textit{acc}]}
+				[die Nuss,roof]]
+			[V{[\type{fin}, \comps \sliste{ \ibox{1}, \ibox{2}, \ibox{3} }]}, name=fin4
+				[gibt]]]]]	
+tikz={\draw[<->] ($(fin1.south west)+(\offsetup,2pt)$) to ($(fin2.north west)+(\offset,-1pt)$);
+      \draw[<->] ($(fin2.south west)+(\offsetup,2pt)$) to ($(fin3.north west)+(\offset,-1pt)$);
+      \draw[<->] ($(fin3.south west)+(\offsetup-4pt,2pt)$) to ($(fin4.north west)+(\offset,-1pt)$);}
+\end{forest}
+}
+%\begin{tikzpicture}[remember picture]
+%\begin{forestintikzpicture}
+% \begin{forest}
+% sm edges, for tree={l+=\baselineskip}
+% [V{\subnode[inner sep=0pt]{fin1}{[}\type{fin}, \comps \eliste]}
+% 	[\ibox{1} NP{[\type{nom}]}
+% 		[Aicke]]
+% 	[V{\subnode[inner sep=0pt]{fin2}{[}\type{fin}, \comps \sliste{ \ibox{1} }]}
+% 		[\ibox{2} NP{[\textit{dat}]}
+% 			[dem Eichhörnchen,roof]]
+% 		[V{[\type{fin}, \comps \sliste{ \ibox{1}, \ibox{2} }]}, name=fin3
+% 			[\ibox{3} NP{[\textit{acc}]}
+% 				[die Nuss,roof]]
+% 			[V{[\type{fin}, \comps \sliste{ \ibox{1}, \ibox{2}, \ibox{3} }]}, name=fin4
+% 				[gibt]]]]]
+% \begin{scope}[overlay,<->,shorten >=2pt, shorten <=2pt]
+% \draw (fin1.south) -- (fin2.north);
+% \end{scope}
+%\end{forestintikzpicture}
+%\end{tikzpicture}
+%\end{forest}
+\caption{\label{fig-projektion-head-feat}Projektion der Kopfmerkmale des Verbs}
+\end{figure}
+\ea
+      \ms{ phon   & list~of~phoneme~strings\\
+           p-o-s  & p-o-s \\
+           vform  & vform \\ 
+           spr    & list~of~signs\\
+           comps  & list~of~signs\\
+           arg-st & list~of~signs\\
+         }
+\z
+Diese Struktur ist für das, was erreicht werden soll, aber wenig geeignet.
+Die Wortart und die Verbform sollen immer gemeinsam projiziert werden. Man könnte das zwar erreichen, indem man jeweils einzelne Strukturteilungen
+zwischen den \textsc{p-o-s}- und \textsc{vform}"=Werten einer verbalen Kopf"|tochter und
+ihrer Mutter vornimmt, eine Bündelung der Information, die projiziert werden soll,
+ist jedoch adäquater: Man führt ein neues Merkmal \textsc{head}\isfeat{head} ein, dessen Wert
+eine komplexe Struktur ist, die alle Merkmale enthält, deren Werte für die
+Erklärung der Distributionseigenschaften\label{page-kopf-merkmal} der Gesamtprojektion relevant sind.
+\ea
+      \ms{ phon & list~of~phoneme~strings\\
+           head & \ms{
+                  p-o-s & p-o-s\\
+                  vform & vform\\
+                  } \\
+           spr    & list~of~signs\\
+           comps  & list~of~signs\\
+           arg-st & list~of~signs\\
+         }
+\z
+Nun ist es aber so, dass Köpfe je nach ihrer Wortart ganz verschiedene Eigenschaften
+besitzen und somit auch unterschiedliche Merkmale projiziert werden müssen.
+Das Merkmal \textsc{vform} ist nur für Verben sinnvoll. Pränominale Adjektive und 
+Nomina projizieren dagegen Kasus. Verben selegieren zwar Argumente, die einen
+bestimmten Kasus haben müssen, sie haben aber selbst keine Kasusmarkierung.
+Man könnte alle Merkmale, die projiziert werden können, in einer Struktur wie
+(\mex{1}) zusammenfassen und dann sagen, dass \textsc{case} bei Verben und \vform
+bei Nomina keine Werte (bzw.\ einen Wert wie \emph{none}) haben.
+\ea
+      \ms{
+                  p-o-s & p-o-s\\
+                  vform & vform\\
+                  case  & case\\
+         }
+\z
+Besser ist es jedoch, davon auszugehen, dass die Merkmalstrukturen für
+Verben und Nomina Objekte verschiedenen Typs sind: Merkmalstrukturen,
+die Verben modellieren, sind vom Typ \type{verb}\istype{verb} und haben deshalb
+ein Merkmal \textsc{vform}. Merkmalstrukturen, die Nomina modellieren,
+sind vom Typ \type{noun}\istype{noun} und haben ein
+Kasusmerkmal\isfeat{case}\label{page-ref-case-feat}. (\mex{1}a) und (\mex{1}b) zeigen entsprechende
+Merkmalbeschreibungen.
+\eal
+\ex
+\ms[verb]{
+vform & vform\\
+}
+\ex
+        \ms[noun]{
+        case & case\\
+        }
+\zl
+
+\noindent
+Der Lexikoneintrag für \emph{gibt}, der auf S.\,\pageref{le-gibt-1}
+angegeben wurde, kann jetzt wie in (\mex{1}) präzisiert werden.
+\begin{figure}
+\ea
+\emph{gibt}:\\
+\ms[word]{ 
+     phon   & \phonliste{ gibt }\\[1mm]
+     head   & \ms[verb]{ vform & fin} \\[2mm]
+%     spr    & \eliste\\
+%     comps  & 
+     arg-st & \liste{ NP[\type{nom}], NP[\type{dat}], NP[\type{acc}] } \\
+}
+\z
+\vspace{-2\baselineskip}
+\end{figure}
+Ein Lexikoneintrag enthält also phonologische Information, Informationen über die Kopfeigenschaften
+(\emph{part of speech}, Verbform, \ldots) und die Argumentstruktur (eine Liste von
+Merkmalbeschreibungen). Diese wird dann auf die Valenzmerkmale \spr und \comps verteilt. Für Verben
+ist \spr die leere Liste, weshalb die \compsl der \argstl entspricht. Das wird im
+Abschnitt~\ref{sec-subj-merkmal} über nicht-finite Verben revidiert werden.
+
+\noindent
+Bis jetzt gibt es in der hier dargestellten Theorie noch nichts, was sicherstellen
+würde, dass die Information, die in Lexikoneinträgen unter \textsc{head} repräsentiert
+ist, auch zum Mutterknoten kommt. Dies wird durch das Kopfmerkmalsprinzip (\emph{Head Feature Principle})
+sichergestellt.
+\begin{prinzip-break}[Kopf"|merkmalprinzip~(\textit{Head~Feature~Principle})]\is{Prinzip!Kopfmerkmals-}
+\label{prinzip-hfp}
+In einer Struktur mit Kopf sind die Kopfmerkmale der Mutter identisch (teilen die Struktur)
+mit den Kopfmerkmalen der Kopf"|tochter.
+\end{prinzip-break}
+Bisher wurden erst drei Dominanzschemata behandelt, aber in den kommenden Kapiteln werden
+noch weitere Schemata dazukommen, \zb Schemata für die Abbindung von Fernabhängigkeiten und für Verbalkomplexe. Das Kopfmerkmalsprinzip ist ein allgemeines Prinzip,
+das für alle durch diese Schemata lizenzierten Strukturen erfüllt sein muss. Es muss --
+wie oben verbal ausgedrückt -- für alle Strukturen mit Kopf gelten. Formal kann man
+das erfassen, indem man Strukturen einteilt in solche mit Kopf und solche ohne
+und denen, die einen Kopf haben, den Typ \type{headed"=phrase} zuweist.
+Der Typ \type{head"=complement"=phrase} -- das ist der Typ, den die Beschreibung in
+Schema~\ref{schema-bin-prel} auf S.\,\pageref{schema-bin-prel} hat -- ist ein Untertyp
+von \type{headed"=phrase}. Objekte eines bestimmten Typs haben immer 
+alle Eigenschaften, die Objekte entsprechender Obertypen haben. Es sei an das Beispiel
+aus Abschnitt~\ref{sec-formalismus-typen} erinnert: Ein Objekt des Typs \textit{frau}
+hat alle Eigenschaften des Typs \textit{person}. Darüber hinaus haben diese Objekte
+noch weitere, spezifischere Eigenschaften, die andere Untertypen von \type{person}
+nicht teilen.
+
+Man kann also formal eine Beschränkung für einen Obertyp festlegen und erreicht damit
+automatisch, dass alle Untertypen genauso beschränkt sind. Das Kopfmerkmalsprinzip
+lässt sich wie folgt formalisieren:
+\ea
+\type{headed"=phrase}\istype{headed"=phrase} \impl
+\ms{ 
+head \ibox{1}\\
+head-dtr$|$head \ibox{1}\\
+} 
+\z
+Der Pfeil\is{\impl} entspricht der Implikation\is{Implikation} aus der Logik.
+(\mex{0}) kann man wie folgt lesen:
+Wenn eine Struktur vom Typ \type{headed"=phrase} ist, dann muss gelten, dass
+der Wert von \textsc{head} mit dem Wert von \textsc{head-dtr$|$head} identisch ist.
+Einen Ausschnitt aus der Typhierarchie unter \type{sign} zeigt Abbildung~\vref{fig-type-sign}.
+\begin{figure}
+\centerline{%
+\begin{forest}
+type hierarchy
+[sign,
+   calign=fixed angles,
+   calign angle=60
+  [word]
+  [phrase
+%    [non-headed-phrase]
+    [headed-phrase
+      [head-specifier-phrase]
+      [head-complement-phrase,calign with current] % calign puts this type in the middle so that the
+                                % line is straight
+      [head-adjunct-phrase]]]]
+\end{forest}}
+\caption{\label{fig-type-sign}Typhierarchie für \type{sign}: alle Untertypen von \type{headed"=phrase} erben Beschränkungen.}
+\end{figure}
+\type{word} und \type{phrase} sind Unterklassen sprachlicher Zeichen.
+In der Abbildung gibt es als Untertyp von \type{phrase} nur den Typ \type{headed-phrase}. \type{headed-phrase} hat die
+Untertypen \type{head-specifier-phrase}, \type{head"=complement"=phrase} und
+\type{head-adjunct-phrase}, Typen, die ich bereits besprochen habe bzw.\ im
+Abschnitt~\ref{sec-Kopf-Adjunkt-Strukturen} vorstellen werde. Auf andere
+Typen werden ich in den kommenden Kapiteln eingehen. Gewöhnlich haben Strukturen einen Kopf, aber
+die Analyse von Relativsätzen, die in Kapitel~\ref{Kapitel-rs} besprochen wird, ist kopflos. Eine
+Verbalprojektion wird mit einer Relativphrase verknüpft. Das Ergebnis ist ein Relativsatz. Die Kopf"|information wird
+nicht von der Verbalprojektion zum Relativsatz übertragen. Relativsätze bilden einen Untertyp des
+Typs \type{phrase}, sind aber keine Untertypen von \type{headed"=phrase}. Ein anderes Beispiel für Strukturen ohne Kopf sind NPN-Konstruktionen
+\citep{Matsuyama2004a,Jackendoff2008a}. (\mex{1}) zeigt ein deutsches Beispiel:
+\ea
+Zeile für Zeile\footnote{%
+  \emph{Zwölf Städte}. Einstürzende Neubauten. Fünf auf der nach oben offenen Richterskala, 1987.
+}
+\z
+In solchen Konstruktionen wird ein Nomen mit beliebig vielen Kombinationen aus Präposition und
+demselben Nomen verknüpft. Zur Analyse siehe \citew{Bargmann2015a} bzw.\ den Übersichtsartikel \citew{MuellerCxG}.
+
+Die Beschreibung in (\mex{1}) zeigt das Kopf"=Komplement"=Schema 
+von S.\,\pageref{schema-bin-prel} zusammen mit den
+Beschränkungen, die der Typ \type{head"=complement"=phrase} von \type{headed"=phrase} erbt.
+\eas
+Kopf-Komplement-Schema + Kopfmerkmalsprinzip:\\
+\ms[head-complement-phrase~]{
+head   & \ibox{1} \\
+comps & \ibox{2} \\[2mm]
+head-dtr  & \ms{ head   & \ibox{1} \\
+                 comps & \ibox{2} $\oplus$ \sliste{ \ibox{3} } \\
+               } \\
+non-head-dtrs  & \sliste{ \ibox{3} } \\
+}
+\zs
+(\mex{1}) zeigt eine Beschreibung der Struktur, die durch das Schema~\ref{schema-bin-prel} lizenziert wird.
+Zusätzlich zur Valenzinformation, die schon in (\ref{ms-die-Nuss-gibt}) enthalten war,
+ist in (\mex{1}) noch die Kopf"|information spezifiziert, und es ist zu sehen, wie
+das Kopfmerkmalsprinzip die Projektion der Merkmale erzwingt: Der Kopfwert der gesamten Struktur
+\iboxb{1} entspricht dem Kopfwert des Verbs \emph{gibt}.
+\ea
+\onems[head-complement-phrase~]{
+      phon  \phonliste{ die, Nuss, gibt }\\
+      head  \ibox{1}\\
+      comps \ibox{2} \sliste{ NP[\nom], NP[\dat]} \\
+      head-dtr \onems[word]{ phon \phonliste{ gibt }\\
+                                     head \ibox{1} \ms[verb]{vform & fin \\
+                                                            }\\
+                                     comps \ibox{2}  $\oplus$ \sliste{ \ibox{3} } \\
+                       } \\
+      non-head-dtrs \liste{ \ibox{3} \onems[head-specifier-phrase~]{ 
+                                        phon \phonliste{ die, Nuss }\\
+                                        head \ms[noun]{ cas & acc\\
+                                                      } \\
+%                                        comps   \eliste \\
+                                        head-dtr \ldots\\
+                                        non-head-dtrs \ldots\\
+                                     }
+                       }\\
+}
+\z
+
+\section{Kopf-Adjunkt-Strukturen}
+\label{sec-Kopf-Adjunkt-Strukturen}
+
+Im Abschnitt~\ref{sec-Adjunkte-psg} wurde schon darauf hingewiesen, dass \textsc{mod} ein Kopfmerkmal
+ist. (\mex{1}) zeigt den Lexikoneintrag für \emph{treues} mit \textsc{mod} als Kopfmerkmal:
+\ea
+\label{le-treue-head-mod}
+\emph{treues}:\\
+\ms{ 
+   phon & \phonliste{ treues }\\
+   head & \ms[adj]{ %prd & $-$ \\
+                        mod &  \nbar\\
+                      } \\
+   spr & \eliste\\
+   comps & \liste{ NP[\type{dat}] } \\
+}
+\z
+Bei der Bildung der Phrase \emph{dem König treues} wird der \headw zur Mutter nach oben gegeben,
+weshalb der \modw von \emph{dem König treues} mit dem von \emph{treues} wie gewünscht identisch ist.
+
+Das folgende Schema lizenziert Kopf"=Adjunkt"=Strukturen:\istype{head"=adjunct"=phrase}
+%\begin{figure}[htbp]
+\begin{samepage}
+\begin{schema}[Kopf-Adjunkt-Schema (vorläufige Version)]
+\label{ha-schema-prel}
+\textit{head"=adjunct"=phrase} \impl\\
+\is{Schema!Kopf"=Adjunkt"=}
+\ms{ 
+head"=dtr      & \ibox{1} \\[2mm]
+non-head"=dtrs & \liste{ \ms{ head$|$mod & \ibox{1} \\
+                              spr & \eliste\\
+                              comps   & \eliste \\
+                           }}\\
+}
+\end{schema}
+\end{samepage}
+%\vspace{-\baselineskip}\end{figure}
+Der \modw des Adjunkts \iboxb{1} wird mit der Kopf"|tochter identifiziert, wodurch
+sichergestellt wird, dass die Kopf"|tochter die vom Adjunkt spezifizierten Eigenschaften hat. Die
+\sprl und die \compsl der Nicht"=Kopf"|tochter ist jeweils die leere Liste, weshalb nur vollständig gesättigte Adjunkte 
+in Kopf"=Adjunkt"=Strukturen zugelassen sind (siehe die Diskussion von *\emph{die Wurst in} auf S.\,\pageref{ex-die-Wurst-in}).
+
+In Kopf"=Adjunkt"=Strukturen werden keine Argumente der Kopftochter abgebunden. Sowohl der \sprw der
+Kopftochter als auch der \compsw muss mit dem entsprechenden Wert der Mutter identifiziert
+werden. Das wird durch das Valenzprinzip sichergestellt, das im folgenden Abschnitt vorgestellt wird.
+
+\section{Das Valenzprinzip}
+\label{Abschnitt-Valenzprinzip}
+
+In den beiden Schemata, die wir bisher besprochen haben, werden jeweils nur die \sprwe und die
+\compswe des Mutterknotens und der Kopftochter erwähnt. In einer Verbindung wie \emph{die Nuss gibt}
+muss aber auch der \sprw der Mutter spezifiziert sein. Wäre das nicht der Fall, wäre der Wert mit
+jedem prinzipiell möglichen Wert kompatibel und man könnte \emph{die Nuss gibt} auch mit irgend
+einem Element als Spezifikator kombinieren. Zum Beispiel mit einer Präposition, einem einzelnen Determinator oder einer NP. Der
+\sprw muss also angegeben werden. In Kopf-Komplement-Strukturen ist der \sprw der Mutter identisch
+mit dem \sprw der Kopftochter, da ja der Kopf mit einem Komplement kombiniert wird und nicht mit
+einem Komplement und einem Spezifikator. In den folgenden Kapiteln werden wir weitere Schemata
+kennenlernen. In all diesen Schemata wird der \sprw von der Kopftochter übernommen. Die
+diesbezügliche Generalisierung kann man mittels Typen ausdrücken: Alle Typen für die entsprechenden
+Schemata sind Untertypen von \type{head-non-specifier-phrase}. (\mex{1}) zeigt Beschränkungen für
+diesen Typ.
+\ea
+\label{type-head-non-specifier-phrase}
+\type{head-non-specifier-phrase}\istype{head"=non"=specifier"=phrase} \impl\\
+\onems{
+      spr \ibox{1} \\
+      head-dtr$|$spr \ibox{1} \\
+      }
+\z
+Der \sprw der Mutter wird mit dem der Kopftochter identifiziert.
+
+Eine analoge Beschränkung braucht man für den \compsw: Wird kein \comps"=Element mit
+einem Kopf kombiniert, dann wird der \compsw mit dem der Mutter identifiziert:
+\ea
+\label{type-head-non-complement-phrase}
+\type{head-non-complement-phrase}\istype{head"=non"=complement"=phrase} \impl\\
+\onems{
+      comps \ibox{1} \\
+      head-dtr$|$comps \ibox{1} \\
+      }
+\z
+
+\noindent
+Die Typhierarchie mit den beiden neuen Typen zeigt Abbildung~\ref{fig-type-sign-Valenzprinzip}.
+\begin{figure}
+\centerline{%
+\begin{forest}
+type hierarchy
+[sign,
+ for tree={
+   calign=fixed angles,
+   calign angle=60
+ } 
+  [word]
+  [phrase
+ %   [non-headed-phrase]
+    [headed-phrase
+      [head-non-specifier-phrase,name=non-specifier
+        [head-complement-phrase,name=complement]
+        [head-adjunct-phrase, name=head-adjunct-phrase]]
+      [head-non-complement-phrase,name=non-complement
+        [,identify=head-adjunct-phrase]
+        [head-specifier-phrase,name=specifier]]]]]
+%\draw (non-specifier.south) to (head-adjunct-phrase.north);
+%\draw (non-complement.south) to (head-adjunct-phrase.north);
+\end{forest}}
+\caption{\label{fig-type-sign-Valenzprinzip}Typhierarchie für \type{sign} mit Untertypen für das Valenzprinzip}
+\end{figure}
+
+Das Valenzprinzip hat hier die Form der Beschränkungen in (\ref{type-head-non-specifier-phrase}) und
+(\ref{type-head-non-complement-phrase}). In der Literatur wird es für gewöhnlich wie folgt in Prosa
+angegeben:
+\begin{prinzip-break}[Valenzprinzip]
+In Strukturen mit Kopf entspricht jedes Valenzmerkmal des Mutterknotens dem Wert des Valenzmerkmals der Kopf"|tochter
+minus den als Nicht"=Kopf"|töchter realisierten Argumenten.
+\end{prinzip-break}
+In der hier erfolgten Formalisierung gibt es nur die beiden Valenzmerkmale \spr und \comps. Die
+Elemente in der \sprl werden in Kopf"=Spezifikator"=Phrasen abgearbeitet und
+die Elemente in der \compsl in Kopf"=Komplement"=Strukturen. Ansonsten wird der \sprw und der \compsw
+der Kopftochter immer mit dem der Mutter identifiziert. Ein Beispiel dafür, dass sowohl der \sprw
+als auch der \compsw zur Mutter hochgereicht wird, sind Kopf"=Adjunkt"=Strukturen. Wir werden aber
+in den kommenden Kapiteln noch weitere Beispiele kennenlernen.
+
+Mit diesen zusätzlichen Beschränkungen sind fast alle Probleme gelöst, aber ein Detail verlangt noch Aufmerksamkeit: Die
+Nominalphrase \emph{das Bild des Gleimtunnels} hat zwei Analysen, die in Abbildung~\ref{fig-das-Bild-des-Gelimtunnels-zwei-Analysen} dargestellt
+sind.
+\begin{figure}
+\hfill
+\begin{forest}
+sm edges
+[{N[\spr \eliste, \comps \eliste]}
+  [Det [das]]
+  [{N[\spr \nliste{ Det }, \comps \eliste]} 
+    [N\feattab{\spr \nliste{ Det },\\ \comps \nliste{ NP }} [Bild]]
+    [NP
+      [des Gleimtunnels, roof]]]]
+\end{forest}
+\hfill
+\begin{forest}
+sm edges
+[{N[\spr \eliste, \comps \eliste]}, s sep+=3ex
+  [{N[\spr \eliste, \comps \nliste{ NP }]} 
+    [Det [das]]
+    [N\feattab{\spr \nliste{ Det },\\ \comps \nliste{ NP }} [Bild]]]
+  [NP
+    [des Gleimtunnels, roof]]]
+\end{forest}\hfill\mbox{}
+
+\caption{Zwei mögliche Analysen von \emph{das Bild des Gleimtunnels}. Die rechte muss ausgeschlossen werden.}\label{fig-das-Bild-des-Gelimtunnels-zwei-Analysen}
+\end{figure}
+In der linken Abbildung wird zuerst das Kopfnomen mit der Genitiv-NP kombiniert und danach der
+Determinator hinzugefügt, in der rechten Abbildung werden zuerst Determinator und Nomen kombiniert
+und danach die Genitiv-NP. Es ist unschön, wenn man zwei Analysen hat, ohne dass es einen
+Bedeutungsunterschied gibt. Solche Mehrdeutigkeiten werden unechte Mehrdeutigkeiten\is{Mehrdeutigkeit!unechte}
+genannt. Glücklicherweise kann man eine der beiden Strukturen ausschließen. Konstituententests
+ergeben, dass man die Determinatoren als letztes Element in Nominalstrukturen mit dem Rest verbinden muss:
+\ea
+alle [[großen Seeelefanten] und [grauen Eichhörnchen]]
+\z
+Der Quantor \emph{alle} bezieht sich auf \emph{großen Seeelefanten und grauen Eichhörnchen}. Würde
+man erst \emph{alle} mit \emph{großen Seeelefanten} verbinden, hätte man mit \emph{grauen
+  Eichhörnchen} einen unintegrierbaren Rest, denn \emph{alle großen Seeelefanten} ist Nominativ oder
+Akkusativ und \emph{grauen Eichhörnchen} wäre Dativ. Geht man davon aus, dass Wörter oder Wortgruppen mit
+der gleichen Valenz koordiniert werden können, sind Beispiele (\mex{0}) automatisch erklärt: Sowohl
+\emph{großen Seeelefanten} als auch \emph{grauen Eichhörnchen} verlangen einen Determinator und die
+Koordination aus beiden Wortgruppen dann auch.
+
+Auch in SVO-Sprachen bilden das Verb und die Komplemente eine VP, die dann mit Adjunkten kombiniert
+werden kann. Erst danach kommt das Subjekt dazu. Die richtige Kombinationsreihenfolge kann man
+erzwingen, indem man im Kopf-Spezifikator-Schema verlangt, dass die Kopftochter eine leere \compsl
+haben muss. Dadurch müssen Nomina und Verben erst all ihre Komplemente zu sich nehmen, bevor sie mit
+einem Determinator oder -- in SVO"=Sprachen -- dem Subjekt kombiniert werden können. Die neue
+Version des Kopf-Spezifikator-Schemas zeigt Schema~\ref{schema-head-specifier-prel-comps-leer}.
+\begin{schema}[Kopf-Spezifikator-Schema (vorläufige Version)]
+\label{schema-head-specifier-prel-comps-leer}
+\type{head-specifier-phrase}\istype{head"=specifier"=phrase} \impl\\
+\onems{
+      spr \ibox{1} \\
+      head-dtr \ms{ spr   & \ibox{1} $\oplus$ \sliste{ \ibox{2} } \\
+                    comps & \eliste\\}\\
+      non-head-dtrs \sliste{ \ibox{2} }\\
+      }
+\end{schema}
+
+
+\noindent
+Damit ist die Reihenfolge der Kombination von Köpfen mit ihren Argumenten und auch die Weitergabe
+von Valenzinformation in komplexen Strukturen geklärt. Für den gesamten Satz \emph{Aicke dem Eichhörnchen die Nuss gibt} bekommt man eine Struktur, die durch (\mex{1})
+beschrieben wird:
+\ea
+\ms{
+head  & \ms[verb]{vform & fin \\
+              }\\
+spr   & \eliste\\
+comps & \eliste\\
+}
+\z
+Das entspricht dem, was schon in Abbildung~\ref{fig-projektion-head-feat} dargestellt wurde, aber
+zusätzlich ist der \sprw als leere Liste spezifiziert. Diese Beschreibung entspricht dem Satzsymbol S\is{Startsymbol} in der Grammatik auf
+S.\,\pageref{bsp-grammatik-psg}, wobei (\mex{0}) noch Information über die Verbform enthält.
+
+
+
+Mit drei Dominanzschemata, Vererbung und Typhierarchien und verschiedenen Prinzipien sind bereits einige der wesentlichen Konzepte der HPSG"=Theorie eingeführt. Im folgenden
+Kapitel wird gezeigt, wie man den semantischen Beitrag von Wörtern repräsentieren und den
+semantischen Beitrag von Phrasen kompositionell bestimmen kann.
+%\largerpage
+
+
+\questions{
+
+\begin{enumerate}
+\item Wie kann man Konstituentenstrukturen mit Hilfe von Merkmalstrukturen modellieren?
+\item Wodurch zeichnen sich Köpfe gegenüber Nichtköpfen aus?
+\item Wie wird erreicht, dass in Bezug auf den Kopf relevante Information auch auf phrasalem
+      Niveau verfügbar ist?
+\end{enumerate}
+
+}
+
+\exercises{
+
+\begin{enumerate}
+\item Zeichnen Sie einen Syntaxbaum für (\mex{1}):
+\ea
+dass das Kind das spannende Buch liest
+\z
+Markieren Sie die Kanten im Baum mit Ad für Adjunkt, Ar für Argument und
+H für Kopf.
+\item Geben Sie die vollständige Merkmalbeschreibung für die Wortfolge in (\mex{1}), wie sie in
+  \emph{dass das Kind schläft} vorkommt,  an:
+      \ea
+      das Kind schläft
+      \z
+\item\label{uebung-grammix-kapitel4}
+      Zum Buch gehören computerverarbeitbare Grammatiken, die
+      den jeweiligen Kapiteln entsprechen \citep{MuellerGrammix}. Zur Verarbeitung benötigen Sie das TRALE-System. Für
+      Computer mit Intel Prozessoren gibt es eine virtuelle Maschine (VM) für das System Grammix zum
+      Download \url{https://hpsg.hu-berlin.de/Software/Grammix/}. Die VM enthält ein eigenes Betriebssystem,
+      so dass Sie unabhängig vom auf dem Computer installierten Betriebssystem arbeiten können. Alle
+      Komponenten der Software sind installiert. Wenn Sie keinen Intel-Computer oder Freude am
+      Installieren haben, können Sie auch eine noch unvollständige Version von TRALE direkt installieren.
+%\largerpage
+
+      Für das Arbeiten mit der virtuellen Maschine gilt: Starten sie die virtuelle Maschine. Wenn der Bootvorgang abgeschlossen ist,
+      sehen Sie einen Bildschirm mit einem Begrüßungsfenster in einem Web"=Browser und
+      mit verschiedenen Icons, die den einzelnen Grammatiken
+      entsprechen. Klicken Sie auf das Icon, unter dem \emph{Grammatik 4} steht. Es werden sich
+      zwei Fenster öffnen, und die Grammatik~4 wird im größeren der beiden Fenster geladen.
+      Nach Beendigung des Ladevorgangs erscheint ein Prompt (\texttt{>>>}). An dieser Stelle
+      können Sie Sätze eingeben, die dann vom System mittels der jeweils geladenen Grammatik
+      analysiert werden. Die Lexika, die zu den Grammatiken gehören, sind sehr klein,
+      aber man kann sie bei Bedarf selbst erweitern.
+
+      Weitere Details zum Arbeiten mit der Grammix"=VM finden Sie im Begrüßungsfenster,
+      das beim Starten der VM geöffnet wird, oder auf der zur VM gehörenden Web"=Seite.
+
+      Analysieren Sie die folgenden Sätze:
+      \eal
+      \ex Der Affe schläft.
+      \ex der Affe das Kind kennt
+      \zl
+      Nach der Eingabe der Sätze öffnet sich ein weiteres Fenster, das Chart"=Display.
+      Das Chart"=Display ist eine Visualisierung der Prozesse, die bei der automatischen
+      Analyse von Sätzen ablaufen. Die einzelnen Teilphrasen, die von der
+      Grammatik lizenziert werden, sind durch Kanten im Chart"=Display dargestellt. Die Kanten
+      kann man anzeigen lassen, indem man sie anklickt.
+
+      Nach einer erfolgreichen Analyse einer Eingabe öffnet sich ein weiteres Fenster mit einem
+      Syntaxbaum. Der Syntaxbaum enthält die Phonologie"=Werte der im Baum enthaltenen
+      linguistischen Objekte und Information über den Typ dieser Objekte.
+      Klickt man die Knoten im Baum an, wird die zugehörige Merkmalbeschreibung
+      angezeigt. Ein weiterer Klick bringt sie wieder zum Verschwinden. Mit der rechten Maustaste
+      kann man Teile von Beschreibungen ausblenden. Durch Klicken auf die Boxen für die Strukturteilung
+      kann man die Werte, die zu den entsprechenden Boxen gehören, ein- und ausblenden.
+
+      Lassen Sie sich die Merkmalbeschreibungen für die Beispiele in (\mex{0}) anzeigen!
+      Überlegen Sie, wieso die Merkmale die Werte haben, die sie haben!\pagebreak
+      
+      Geben Sie die ungrammatischen Wortfolgen in (\mex{1}) (ohne den Stern) ein:
+      \eal
+      \ex[*]{
+      Affe schläft.
+      }
+      \ex[*]{
+      Der Affe kennt.
+      }
+      \zl
+      Inspizieren Sie mit Hilfe des Chart"=Displays die Parse"=Chart! Welche Wörter
+      werden zu Wortgruppen zusammengebaut, welche nicht? Warum ist das so?
+
+      In der Datei test\_items.pl befinden sich wohlgeformte und nicht wohlgeformte
+      Wortgruppen. Diese können Sie analysieren lassen. CTRL-C CTRL-T erlaubt Ihnen unten in der
+      Statuszeile Bereiche einzugeben, die analysiert werden sollen. Wenn Sie einfach Enter drücken,
+      werden alle Beispiele analysiert.
+\end{enumerate}
+}
