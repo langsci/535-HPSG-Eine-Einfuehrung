@@ -732,7 +732,7 @@
 %\ifxetex\else\ClassError{langscibook}{Please use XeLaTeX!}{}\fi
 
 \usepackage{ifluatex}
-%\ifluatex\else\ClassError{langscibook}{Please use LuaLaTeX!}{}\fi
+\ifluatex\else\ClassError{langscibook}{Please use LuaLaTeX!}{}\fi
 
 \ifluatex
 % do not show warnings concerning a pdf backend
