@@ -196,3 +196,8 @@
 
 % for \hyp in references
 \usepackage{hyphenat}
+
+% https://tex.stackexchange.com/a/323919/18561
+\newcommand*{\nolink}[1]{%
+  {\protect\NoHyper#1\protect\endNoHyper}%
+}

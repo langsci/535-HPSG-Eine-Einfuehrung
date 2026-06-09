@@ -215,11 +215,10 @@ install:
 	cp -p ${STYLE-PATH}Ling/article-ex.sty           styles/
 	cp -p ${STYLE-PATH}Ling/merkmalstruktur.sty      styles/
 	cp -p ${STYLE-PATH}my-xspace.sty            styles/
-	cp -p ${STYLE-PATH}Ling/my-ccg-ohne-colortbl.sty styles/
 	cp -p ${STYLE-PATH}Ling/tikz-mrs.sty 		styles/
 #	cp -p ${STYLE-PATH}Ling/forest.sty               .
-#	cp -p ${STYLE-PATH}Ling/forest-lib-edges.sty     .
-#	cp -p ${STYLE-PATH}Ling/forest-lib-linguistics.sty .
+	cp -p ${STYLE-PATH}Ling/forest-lib-edges.sty     .
+	cp -p ${STYLE-PATH}Ling/forest-lib-linguistics.sty .
 	cp -p ${STYLE-PATH}de-hyp-utf8.sty 	         styles/
 	cp -p ${STYLE-PATH}Ling/cgloss.sty               styles/
 	cp -p ${STYLE-PATH}Ling/jambox.sty               styles/
