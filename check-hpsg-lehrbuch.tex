@@ -1,6 +1,6 @@
 %% -*- coding:utf-8 -*-
-\documentclass[output=book,
-               smallfont
+\documentclass[output=book
+               ,smallfont
 %                ,series=tbls,
 %		,modfonts
 %		,nonflat
@@ -8,13 +8,12 @@
 %	        ,collection
 %	        ,collectionchapter
 %	        ,collectiontoclongg
-% 	        ,biblatex
+% 	        ,biblatex  
                 ,decapbib
-%                ,babel
                 ,booklanguage=german
 %                ,babelshorthands
 %                ,showindex
-%                ,newtxmath
+% option not used package loaded anyway in langscibook.cls                ,newtxmath
 %                ,colorlinks, citecolor=brown % for drafts
 %                ,draftmode
 % 	        ,coverus
@@ -22,13 +21,6 @@
 		  ]{langscibook} 
 
 
-%	citestyle=langsci-unified,
-%	datamodel=langsci,   % add authauthor and autheditor as possible fields to bibtex entries
-
-
-
-
-%\renewcommand{\lsBookLanguage}{german}
 
 \usepackage{ifthen}
 \provideboolean{draft}
@@ -38,39 +30,17 @@
 %\newtoggle{draft}\toggletrue{draft}
 %\newtoggle{finished}\togglefalse{finished}
 
-% https://tex.stackexchange.com/a/111851/18561
-\DeclareSourcemap{
-    \maps[datatype=bibtex]{
-      \map{
-        \step[fieldsource=checked]
-        \step[fieldset=usera,origfieldval]
-    }
-  }
-}
-
-%\DeclareFieldFormat{usera}{\red{#1}}
-
-% This shows the value of checked:
-%\AtEveryBibitem{
-%\csappto{blx@bbx@\thefield{entrytype}}{\iffieldundef{usera}{\space \red{Not checked!}}{\space\green{\printfield{usera}}}}
-%}
-% This just shows a warning for unchecked items
-\AtEveryBibitem{
-\csappto{blx@bbx@\thefield{entrytype}}{\iffieldundef{usera}{\space \red{Not checked!}}{}}
-}
 
 
 % load memoize before german.sty
 
 %\usepackage{nomemoize} 
-%\usepackage[extract=no]{memoize} % If malformed trees occur in a first pass, use this and extract later.
-\usepackage[extract=python]{memoize} 
-%\usepackage[biblatex={}]{memoize} % 
-
-%\memoizeset{readonly}
+\usepackage{memoize} 
+% Figures are created while compiling with check-hpsg-lehrbuch.
+% Sometimes trees are broken during first compile. To be on the safe side,
+% we set things to be readonly here in main.tex
+%\mmzset{readonly}
 % see below for further settings
-
-
 
 \input{localhyphenation.tex} % has to be loaded before german.sty
 \input{localmetadata.tex}
@@ -81,60 +51,109 @@
 
 
 \newcommand{\NOTE}[1]{}\newcommand{\LATER}[1]{}
-%\newcommand{\NOTE}[1]{\marginpar{#1}}\newcommand{\LATER}[1]{}
+%\newcommand{\NOTE}[1]{\marginpar{#1}}
+
+\renewcommand{\itdopt}[1]{}
+\renewcommand{\todostefan}[1]{}
+
 
 \mmzset{
-  prefix=hpsg.memo.dir/,
+  prefix={hpsg.memo.dir/},
 }
 
+%\usepackage{nohyperref}
 
 % \renewcommand{\itd}[1]{}
 % \renewcommand{\itdobl}[1]{}
 % \renewcommand{\itdopt}[1]{}
 
-% \renewcommand{\addpages}{}
+\renewcommand{\addpages}{\xspace}
 % \renewcommand{\addsource}{}
 % \renewcommand{\addglosses}{}
 
 
-%\bibliography{bib-abbr,biblio-xdata-en,biblio}
-% we have to load from here since we have to include all references since we need "Müller 2004d" in
-% the text since it takes more space than "Müller 2004". So we have to include a \nocite{*} here.
 \bibliography{hpsg-lehrbuch}
+%\bibliography{bib-abbr,biblio-xdata-en,biblio}
+
+%\PassOptionsToPackage{draft}{hyperref}
+
+% complains about \href being defined
+% Doesn't make a difference in speed. 24.03.2025
+% \usepackage{nohyperref}
+
+%\input hpsg-lehrbuch-include
+
+%%%% included file
+
+%\hypersetup{bookmarksopenlevel=0}
 
 
-%\includeonly{chapters/00-hpsg-vorwort}
-%\includeonly{chapters/00-hpsg-danksagungen}
-%\includeonly{chapters/00-hpsg-vorwort,chapters/00-hpsg-danksagungen}
-%\includeonly{chapters/01-hpsg-einleitung}
-%\includeonly{chapters/02-hpsg-formalismus}
-%\includeonly{chapters/03-hpsg-valenz-psg}
-%\includeonly{chapters/04-hpsg-komplementation}
-%\includeonly{chapters/05-hpsg-semantik}
-%\includeonly{chapters/06-hpsg-lexikon}
-%\includeonly{chapters/07-hpsg-topologie}
-%\includeonly{chapters/08-hpsg-konstituentenreihenfolge}
-%\includeonly{chapters/09-hpsg-udc}
-%\includeonly{chapters/10-hpsg-rs}
-%\includeonly{chapters/11-hpsg-lokalitaet}
-%\includeonly{chapters/12-hpsg-kongruenz}
-%\includeonly{chapters/13-hpsg-kasus}
-%\includeonly{chapters/14-hpsg-verbalkomplex}
-%\includeonly{chapters/15-hpsg-anhebung}
+
+%\renewcommand{\centerfit}[1]{}
+
+
+\provideboolean{hpsg-buch}
+\setboolean{hpsg-buch}{true}
+
+\PassOptionsToPackage{main=ngerman}{babel}
+
+
 \includeonly{chapters/16-hpsg-passiv}
-%\includeonly{chapters/17-hpsg-partikel}
-%\includeonly{chapters/18-hpsg-morphologie}
-%\includeonly{chapters/19-hpsg-theorie}
-%\includeonly{chapters/hpsg-loesungen}
 
-%\includeonly{chapters/17-hpsg-partikel,chapters/18-hpsg-morphologie,chapters/hpsg-loesungen}
+\begin{document} 
 
-\input hpsg-lehrbuch-include
+%\lsBookLanguageGerman
 
-% Hack to get all items cited in the files not included in this run.
-% only use this if you have gt.bib
-% explanation above, we need this since we want to have all occurrances of Müller 2004a,b,c
-\nocite{*}
+% \mmzset{
+%   deactivate=\todo,
+% }
+
+
+\include{title-toc}
+
+
+\include{chapters/00-hpsg-vorwort}
+\include{chapters/00-hpsg-danksagungen}
+% \include{chapters/acknowledgments}
+% \include{chapters/abbreviations} 
+
+\mainmatter
+\include{chapters/01-hpsg-einleitung}
+\include{chapters/02-hpsg-formalismus}
+\include{chapters/03-hpsg-valenz-psg}
+\include{chapters/04-hpsg-komplementation}
+\include{chapters/05-hpsg-semantik}
+\include{chapters/06-hpsg-lexikon}
+\include{chapters/07-hpsg-topologie}
+\include{chapters/08-hpsg-konstituentenreihenfolge}
+\include{chapters/09-hpsg-udc}
+\include{chapters/10-hpsg-rs}
+\include{chapters/11-hpsg-lokalitaet}
+\include{chapters/12-hpsg-kongruenz}
+\include{chapters/13-hpsg-kasus}
+\include{chapters/14-hpsg-verbalkomplex}
+\include{chapters/15-hpsg-anhebung}
+\include{chapters/16-hpsg-passiv}
+\include{chapters/17-hpsg-partikel}
+
+\include{chapters/18-hpsg-morphologie}
+
+\include{chapters/19-hpsg-theorie}
+
+\appendix
+\include{chapters/hpsg-loesungen}
+
+\mmzset{disable}
+\input{backmatter}
+
+
+% end included file
+
+
+%%% Local Variables:
+%%% TeX-master: "check-germanic"
+%%% TeX-command-extra-options: "-shell-escape"
+%%% End:
 
 
 \end{document}
