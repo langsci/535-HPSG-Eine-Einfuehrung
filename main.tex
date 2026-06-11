@@ -26,16 +26,16 @@
 \provideboolean{draft}
 \setboolean{draft}{false}
 
-%\newtoggle{draft}\togglefalse{draft}
-\newtoggle{draft}\toggletrue{draft}
+\newtoggle{draft}\togglefalse{draft}
+%\newtoggle{draft}\toggletrue{draft}
 %\newtoggle{finished}\togglefalse{finished}
 
 
 
 % load memoize before german.sty
 
-\usepackage{nomemoize} 
-%\usepackage{memoize} 
+%\usepackage{nomemoize} 
+\usepackage{memoize} 
 % Figures are created while compiling with check-hpsg-lehrbuch.
 % Sometimes trees are broken during first compile. To be on the safe side,
 % we set things to be readonly here in main.tex
