@@ -2434,7 +2434,7 @@ es gibt nur zwei Plätze: h2 und h3.
   Pfad von h8 zu h9, der nicht über h1 führt.}\label{Abbildung dessen Kind-falsche-MRS}
 \end{figure}
 Wenn man versucht, den Existenzquantor in h7 einzustöpseln, ergibt sich eine Konfiguration, in der
-die Variable x in h8:besitzen(x,y) ungebunden ist (Abbildung~\ref{Abbildung dessen Kind-falsch}). h3 müsste sowohl mit h9:lachen(x) als auch mit
+die Variable x in h8:besitzen(x,y) ungebunden ist (Abbildung~\ref{Abbildung dessen Kind-falsch-x-ungebunden}). h3 müsste sowohl mit h9:lachen(x) als auch mit
 h8:besitzen(x,y) verbunden sein, was technisch ausgeschlossen ist, da man nur ein Label in h3
 einstöpseln kann.
 
@@ -2517,6 +2517,8 @@ Body des Definitheitsquantors sein.}\label{Abbildung dessen Kind-falsch-geskopt}
 Das Problem lässt sich lösen, indem man \relation{besitzen} der Restriktion zuordnet, die ohnehin schon zwei
 Variablen enthält. Das ist h4, denn affe(x) wird ja durch den Relativsatz mit schlafen(y)
 modifiziert. Die korrekte ungeskopte MRS mit den zusätzlichen Links für die Variablen x und y zeigt Abbildung~\ref{Abbildung dessen Kind}.
+Im Abschnitt~\ref{Abschnitt-rs-sem-Analyse} wird die Analyse vorgestellt, die die korrekte MRS
+liefert. 
 \begin{figure}
 \begin{tikzpicture}[node distance=3.8cm,mrs]
 %\draw (-5,10) to[grid with coordinates] (5,-.5);
@@ -2538,7 +2540,7 @@ modifiziert. Die korrekte ungeskopte MRS mit den zusätzlichen Links für die Va
 \end{tikzpicture}
 \caption{Korrekte MRS für \emph{Ein Affe, dessen Kind schläft, lacht.}}\label{Abbildung dessen Kind}
 \end{figure}
-Im Abschnitt~\ref{Abschnitt-rs-sem-Analyse} wird die Analyse vorgestellt, die die korrekte MRS liefert. 
+
 
 Damit sind die schwierigen Themen Quantorenskopus und Unterspezifikation behandelt. Im kommenden
 Abschnitt werden alle Teile der kompositionalen Semantik zum Semantikprinzip zusammengestellt.
